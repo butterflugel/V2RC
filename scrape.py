@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import random
 import time
 import urllib.parse
+import base64  # for vmess decoding in dedup key
 
 CONFIG_REGEX = re.compile(
     r'(vmess://[^\s<>\[\]]+|vless://[^\s<>\[\]]+|trojan://[^\s<>\[\]]+|ss://[^\s<>\[\]]+|hysteria2://[^\s<>\[\]]+|hysteria://[^\s<>\[\]]+)'
@@ -15,8 +16,8 @@ DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
 CHANNELS_FILE = "channels.json"
-MAX_CONFIGS_PER_CHANNEL = 300      # reduced from 500 - keeps most recent 300 per channel
-MAX_PAGES_PER_CHANNEL = 12         # adjust as needed (5–20)
+MAX_CONFIGS_PER_CHANNEL = 300      # most recent 300 per channel
+MAX_PAGES_PER_CHANNEL = 15         # adjust as needed (5–20)
 REQUEST_TIMEOUT = 25
 
 USER_AGENTS = [
@@ -33,8 +34,51 @@ def get_random_headers():
         "Accept-Language": "en-US,en;q=0.5",
     }
 
-def clean_and_normalize_config(raw_link: str, index: int = 0) -> str:
-    """Parse link and create a clean, meaningful remark"""
+def get_config_unique_key(link: str) -> str:
+    """Extract a unique key for dedup (host:port:uuid/password)"""
+    try:
+        parsed = urllib.parse.urlparse(link)
+        scheme = parsed.scheme.lower()
+        
+        if scheme == 'vmess':
+            padded = parsed.path + '=' * (4 - len(parsed.path) % 4)
+            decoded = base64.b64decode(padded).decode('utf-8')
+            config = json.loads(decoded)
+            host = config.get('add', '')
+            port = str(config.get('port', ''))
+            uuid = config.get('id', '')
+            return f"{scheme}:{host}:{port}:{uuid}"
+        
+        elif scheme in ['vless', 'trojan']:
+            if '@' in parsed.netloc:
+                user, addr = parsed.netloc.split('@', 1)
+            else:
+                user = ''
+                addr = parsed.netloc
+            return f"{scheme}:{user}:{addr}"
+        
+        elif scheme == 'ss':
+            if '@' in parsed.netloc:
+                auth, addr = parsed.netloc.split('@', 1)
+            else:
+                auth = ''
+                addr = parsed.netloc
+            return f"{scheme}:{auth}:{addr}"
+        
+        elif scheme.startswith('hysteria'):
+            if '@' in parsed.netloc:
+                user, addr = parsed.netloc.split('@', 1)
+            else:
+                user = ''
+                addr = parsed.netloc
+            return f"{scheme}:{user}:{addr}"
+        
+        return link  # fallback if parsing fails
+    except:
+        return link
+
+def clean_and_normalize_config(raw_link: str, channel_name: str, index: int = 0) -> str:
+    """Parse link and create a clean remark prefixed with channel name"""
     try:
         parsed = urllib.parse.urlparse(raw_link)
         qs = urllib.parse.parse_qs(parsed.query)
@@ -42,29 +86,27 @@ def clean_and_normalize_config(raw_link: str, index: int = 0) -> str:
         remark = qs.get('remark', [''])[0].strip()
         remark = re.sub(r'[^\w\s\-:]', '', remark)  # strip emojis & junk
 
-        if remark and len(remark) > 4:  # use only if it looks useful
-            if len(remark) > 60:
-                remark = remark[:57] + "..."
+        if remark and len(remark) > 4:  # use original if decent
+            if len(remark) > 50:  # shorten to leave room for channel prefix
+                remark = remark[:47] + "..."
+            final_remark = f"{channel_name} - {remark}"
         else:
-            # Improved fallback naming
+            # Fallback with channel prefix
             host = parsed.hostname or "unknown"
             port_str = f":{parsed.port}" if parsed.port else ""
             proto = parsed.scheme.upper()
-
-            # Add uniqueness if many similar configs
             extra = ""
-            if index > 0 and index % 5 == 0:  # every 5th gets numbered
+            if index > 0 and index % 10 == 0:  # less frequent numbering
                 extra = f" #{index}"
             elif '#' in raw_link:
                 frag = raw_link.split('#')[-1][:8].strip()
                 if frag and len(frag) > 3:
                     extra = f" #{frag}"
+            final_remark = f"{channel_name} - {host}{port_str} - {proto}{extra}"
 
-            remark = f"{host}{port_str} - {proto}{extra}"
-
-        # Rebuild the link with cleaned remark (preserve other params)
+        # Rebuild link with new remark (preserve other params)
         new_qs = {k: v for k, v in qs.items() if k != 'remark'}
-        new_qs['remark'] = [remark]
+        new_qs['remark'] = [final_remark]
         new_query = urllib.parse.urlencode(new_qs, doseq=True)
 
         clean_link = urllib.parse.urlunparse((
@@ -78,15 +120,16 @@ def clean_and_normalize_config(raw_link: str, index: int = 0) -> str:
 
         return clean_link
     except Exception:
-        # Last resort fallback
-        fallback_remark = f"Config-{index}" if index > 0 else "Config"
+        # Last resort
+        fallback_remark = f"{channel_name} - Config-{index}" if index > 0 else f"{channel_name} - Config"
         sep = '&' if '?' in raw_link else '?'
-        return f"{raw_link}{sep}remark={fallback_remark}"
+        return f"{raw_link}{sep}remark={urllib.parse.quote(fallback_remark)}"
 
 
 def scrape_channel(base_url: str, name: str):
     print(f"\nScraping {name} ({base_url}) ...")
-    all_configs = set()  # dedup across pages
+    new_configs = []  # list to preserve order (newest first)
+    seen_keys = set()  # for strict dedup by unique key
     url = base_url.rstrip('/')
     page_count = 0
     global_index = 0
@@ -122,12 +165,15 @@ def scrape_channel(base_url: str, name: str):
 
             for raw_link in found_links:
                 global_index += 1
-                clean_link = clean_and_normalize_config(raw_link, index=global_index)
-                if clean_link not in all_configs:
-                    all_configs.add(clean_link)
-                    page_new_count += 1
+                unique_key = get_config_unique_key(raw_link)
+                if unique_key in seen_keys:
+                    continue  # skip duplicate core config
+                seen_keys.add(unique_key)
+                clean_link = clean_and_normalize_config(raw_link, channel_name=name, index=global_index)
+                new_configs.append(clean_link)
+                page_new_count += 1
 
-            # Find oldest message ID for next page
+            # Find oldest ID
             data_post = wrapper.get("data-post")
             if data_post:
                 try:
@@ -138,16 +184,15 @@ def scrape_channel(base_url: str, name: str):
                 except:
                     pass
 
-        print(f"  → Added {page_new_count} new unique configs (total: {len(all_configs)})")
+        print(f"  → Added {page_new_count} new unique configs (total: {len(new_configs)})")
 
         if oldest_msg_id is None or oldest_msg_id <= 1:
             break
 
         url = f"{base_url}?before={oldest_msg_id}"
 
-    # Save result
-    configs_list = list(all_configs)
-    print(f"→ Total unique configs after {page_count} pages: {len(configs_list)}")
+    # Save: prepend new to old, dedup (though strict dedup already applied), limit to 300 most recent
+    print(f"→ Total unique new configs after {page_count} pages: {len(new_configs)}")
 
     outfile = DATA_DIR / f"{name}.txt"
     old_configs = []
@@ -155,8 +200,7 @@ def scrape_channel(base_url: str, name: str):
         with open(outfile, encoding="utf-8") as f:
             old_configs = [line.strip() for line in f if line.strip()]
 
-    # Keep only the most recent 300 (newest first since we scrape recent → older)
-    combined = list(dict.fromkeys(configs_list + old_configs))[:MAX_CONFIGS_PER_CHANNEL]
+    combined = list(dict.fromkeys(new_configs + old_configs))[:MAX_CONFIGS_PER_CHANNEL]
 
     with open(outfile, "w", encoding="utf-8") as f:
         f.write("\n".join(combined) + "\n")

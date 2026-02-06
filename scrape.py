@@ -1,9 +1,8 @@
-import asyncio
 import re
 import json
 from pathlib import Path
+import requests
 from bs4 import BeautifulSoup
-from playwright.async_api import async_playwright
 
 CONFIG_REGEX = re.compile(
     r'(vmess://[^\s]+|vless://[^\s]+|trojan://[^\s]+|ss://[^\s]+|hysteria2://[^\s]+|hysteria://[^\s]+)'
@@ -13,72 +12,55 @@ DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
 CHANNELS_FILE = "channels.json"
+MAX_CONFIGS = 200
 
-MAX_CONFIGS = 200  # max configs per file
-SCROLL_PAUSE = 1.5  # seconds between scrolls
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+}
 
-async def scrape_channel(page, url, name):
+def scrape_channel(url, name):
     print(f"Scraping {name}...")
-    await page.goto(url, timeout=60000)
-    
-    previous_height = None
-    collected_texts = set()
-    
-    while True:
-        # extract all message texts
-        html = await page.inner_html("body")
-        soup = BeautifulSoup(html, "html.parser")
-        messages = soup.select(".tgme_widget_message_text")
-        
-        for msg in messages:
-            collected_texts.add(msg.get_text())
-        
-        # extract configs
-        matches = []
-        for t in collected_texts:
-            matches.extend(CONFIG_REGEX.findall(t))
-        matches = list(dict.fromkeys(matches))  # dedupe
-        
-        if len(matches) >= MAX_CONFIGS:
-            matches = matches[:MAX_CONFIGS]
-            break
-        
-        # scroll down to load older posts
-        current_height = await page.evaluate("document.body.scrollHeight")
-        if previous_height == current_height:
-            break  # no more content
-        previous_height = current_height
-        await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        await asyncio.sleep(SCROLL_PAUSE)
-    
-    # Load existing file
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=25)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"Request failed for {name}: {e}")
+        return
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    messages = soup.select("div.tgme_widget_message_text")
+
+    configs = []
+    for msg in messages:
+        text = msg.get_text(separator="\n", strip=True)
+        found = CONFIG_REGEX.findall(text)
+        configs.extend(found)
+
+    configs = list(dict.fromkeys(configs))  # dedupe preserve order
+
+    # Load old
     outfile = DATA_DIR / f"{name}.txt"
-    old_configs = []
-    if outfile.exists():
-        with open(outfile, "r", encoding="utf-8") as f:
-            old_configs = [line.strip() for line in f if line.strip()]
-    
-    # Merge: new on top, old below, dedupe
-    combined = list(dict.fromkeys(matches + old_configs))[:MAX_CONFIGS]
-    
-    # save
+    old = []
+    if outfile.is_file():
+        with open(outfile, encoding="utf-8") as f:
+            old = [l.strip() for l in f if l.strip()]
+
+    # Newest first
+    combined = list(dict.fromkeys(configs + old))[:MAX_CONFIGS]
+
     with open(outfile, "w", encoding="utf-8") as f:
-        f.write("\n".join(combined))
-    
+        f.write("\n".join(combined) + "\n")
+
     print(f"Saved {len(combined)} configs → {outfile}")
 
 
-async def main():
-    with open(CHANNELS_FILE, "r", encoding="utf-8") as f:
+def main():
+    with open(CHANNELS_FILE, encoding="utf-8") as f:
         channels = json.load(f)
 
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
-        for name, url in channels.items():
-            await scrape_channel(page, url, name)
-        await browser.close()
+    for name, url in channels.items():
+        scrape_channel(url, name)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

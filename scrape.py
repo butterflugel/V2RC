@@ -8,8 +8,9 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
+# regex matches full config links directly
 CONFIG_REGEX = re.compile(
-    r'(vmess://[^\s,]+|vless://[^\s,]+|trojan://[^\s,]+|ss://[^\s,]+|hysteria2://[^\s,]+|hysteria://[^\s,]+)',
+    r'(vmess://[^\s]+|vless://[^\s]+|trojan://[^\s]+|ss://[^\s]+|hysteria2://[^\s]+|hysteria://[^\s]+)',
     re.IGNORECASE
 )
 
@@ -36,10 +37,9 @@ for name, url in channels.items():
 
     found = []
     for t in texts:
-        parts = re.split(r'[\s,]+', t.get_text())
-        for p in parts:
-            if CONFIG_REGEX.match(p):
-                found.append(p)
+        # apply regex directly to the full message text
+        matches = CONFIG_REGEX.findall(t.get_text())
+        found.extend(matches)
 
     # Load existing configs
     outfile = DATA_DIR / f"{name}.txt"

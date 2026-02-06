@@ -2,7 +2,7 @@ name: Update V2Ray Configs
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "0 * * * *"          # Every hour (on the hour)
   workflow_dispatch:
 
 jobs:
@@ -36,11 +36,11 @@ jobs:
           # Pull latest remote changes and rebase our work on top
           git pull --rebase origin main || echo "No remote changes to pull or pull failed"
 
-          # Stage all generated .txt files (includes both raw and _sub.txt)
+          # Stage all generated .txt files
           git add data/*.txt || true
 
           # Commit only if there are changes (suppress error if nothing new)
-          git commit -m "chore: auto-update V2Ray configs and subscriptions" || echo "No changes to commit"
+          git commit -m "chore: auto-update V2Ray configs" || echo "No changes to commit"
 
           # Push the updated branch
           git push

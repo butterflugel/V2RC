@@ -2,7 +2,7 @@ name: Update V2Ray Configs
 
 on:
   schedule:
-    - cron: "*/20 * * * *"  # every 20 minutes
+    - cron: "*/20 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        run: |
+          pip install playwright beautifulsoup4
+          playwright install chromium
 
       - name: Run scraper
         run: python scrape.py

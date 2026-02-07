@@ -2,7 +2,7 @@ name: Update V2Ray Configs
 
 on:
   schedule:
-    - cron: "0 * * * *"          # Every hour (on the hour)
+  - cron: "0 */2 * * *"
   workflow_dispatch:
 
 jobs:

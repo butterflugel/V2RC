@@ -1,4 +1,4 @@
-name: Update V2Ray Configs
+name: Update
 
 on:
   schedule:

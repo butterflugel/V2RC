@@ -18,7 +18,7 @@ DATA_DIR.mkdir(exist_ok=True)
 CHANNELS_FILE = "channels.json"
 MAX_CONFIGS_PER_CHANNEL = 300
 MAX_PAGES_PER_CHANNEL = 15
-REQUEST_TIMEOUT = 25
+REQUEST_TIMEOUT = 15
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",

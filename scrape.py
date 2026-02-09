@@ -16,8 +16,8 @@ DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
 CHANNELS_FILE = "channels.json"
-MAX_CONFIGS_PER_CHANNEL = 400      # most recent 400 per channel
-MAX_PAGES_PER_CHANNEL = 20         # adjust as needed (5–20)
+MAX_CONFIGS_PER_CHANNEL = 300      # most recent 300 per channel
+MAX_PAGES_PER_CHANNEL = 15         # adjust as needed (5–20)
 REQUEST_TIMEOUT = 25
 
 USER_AGENTS = [

@@ -10,6 +10,12 @@ vless://9ea1c096-74a7-4016-bcf4-7b89c4558645@188.114.98.0:2083?path=%2F%3Fed%3D2
 vless://a26bbed7-a286-4840-84bc-dc102c526777@python.org:80?mode=auto&path=category%2Fmusic&security=&encryption=none&host=iran.boltboost.gg&type=xhttp#%25DA%25A9%25D8%25A7%25D9%2586%25D8%25A7%25D9%2584%2520%25D8%25AA%25D9%2584%25DA%25AF%25D8%25B1%25D8%25A7%25D9%2585%2520%253A%2520ConfigV2RayNG%2540
 vless://22c42cbd-efa7-495c-ba6d-5895e29f66f8@f1.springpaatogh8.store:2087?path=%2F%3Fed%3D2560&security=tls&encryption=none&insecure=0&host=gamepc.sorza.ir&type=ws&allowInsecure=0&sni=digikala.sorza.ir#%2540ConfigV2RayNG
 vless://991519c1-3680-49b7-bb9f-9029a7a39067@vip-80.f-sub.cfd:1517?security=none&encryption=none&host=varzesh3.com&headerType=http&type=tcp#%25F0%259F%2592%25AB%2520%2540ConfigV2RayNG%2520%2528%25D8%25AA%25D9%2584%25DA%25AF%25D8%25B1%25D8%25A7%25D9%2585%2529
+trojan://humanity@104.18.32.37:443?path=%2Fassignment&security=tls&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=www.gossipglove.com#%2540ConfigV2RayNG%2520%25F0%259F%2592%25B5
+trojan://humanity@188.114.96.3:443?path=%2Fassignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#%2540ConfigV2RayNG%2520%25F0%259F%2592%25B5
+trojan://humanity@172.64.152.23:443?path=%2Fassignment&security=tls&insecure=0&host=www.gossipglove.com&fp=chrome&type=ws&allowInsecure=0&sni=www.gossipglove.com#%2540ConfigV2RayNG%2520%25F0%259F%2592%25B5
+vless://3321a819-889d-40b3-b8fa-f34208827ef1@104.17.73.206:443?path=%2FTel-%40V2rayAlpha&security=tls&encryption=none&insecure=0&host=o00o.snip.qzz.io&type=ws&allowInsecure=0&sni=o00o.snip.qzz.io#ConfigV2RayNG
+vless://007a5c24-cdbe-4adc-a79f-ca2768fef8bb@edge.aiteamplus.ir:10007?security=none&encryption=none&headerType=http&type=tcp#%25F0%259F%2587%25A9%25F0%259F%2587%25AA%2520ConfigV2RayNG
+vless://007a5c24-cdbe-4adc-a79f-ca2768fef8bb@edge.aiteamplus.ir:10008?mode=auto&path=%2Fapi&security=none&encryption=none&host=play.google.com&type=xhttp#%25F0%259F%2587%25B3%25F0%259F%2587%25B1%2520ConfigV2RayNG
 vless://98aaebaa-bf4f-4e25-96f2-844691440360@140.248.159.164:80?path=%2Fcontainers%2Ffi&security=none&encryption=none&host=helimeligodi.global.ssl.fastly.net&type=ws#ConfigV2RayNG
 vless://98aaebaa-bf4f-4e25-96f2-844691440360@theverge.com:80?path=%2Fcontainers%2Ffi&security=none&encryption=none&host=declanrice.global.ssl.fastly.net&type=ws#ConfigV2RayNG
 vless://e07c6a8b-f67d-4297-bc8f-31855eef57a8@www.speedtest.net:8443?path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=Tet.mehspeedtest.com#ConfigV2RayNG
@@ -292,9 +298,3 @@ vless://50b95deb-6394-46c5-b88a-583e5b3ca7ee@178.250.243.102:443?security=realit
 vless://257c06fc-017f-4a1b-878a-d9611c046ee4@lit3.litiran.ir:2083?security=tls&encryption=none&insecure=0&host=image-alm2.vipshop2.shop&type=ws&allowInsecure=0&sni=image-alm2.vipshop2.shop#%25F0%259F%2587%25A9%25F0%259F%2587%25AA%2520%2540ConfigV2RayNG
 vless://257c06fc-017f-4a1b-878a-d9611c046ee4@lit.litiran.ir:2083?security=tls&encryption=none&insecure=0&host=image-it.kafeistanbul.shop&type=ws&allowInsecure=0&sni=image-it.kafeistanbul.shop#%25F0%259F%2587%25AE%25F0%259F%2587%25B9%2520%2540ConfigV2RayNG
 vless://abe2580c-c95e-4fcd-adc3-faa41d34cad9@85.133.161.168:2087?security=none&encryption=none&host=soft98.ir&headerType=http&type=tcp#ConfigV2RayNG%2520%25F0%259F%25A7%2594%2520%25F0%259F%2587%25A6%25F0%259F%2587%25AA%25F0%259F%2587%25AE%25F0%259F%2587%25B7
-trojan://humanity@104.18.7.147:443?path=%2Fassignment&security=tls&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=www.creationlong.org#%2540ConfigV2RayNG
-trojan://humanity@188.114.96.3:443?path=%2Fassignment&security=tls&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=www.multiplydose.com#%2540ConfigV2RayNG
-vless://257c06fc-017f-4a1b-878a-d9611c046ee4@v5.vipshopkar9.shop:8081?security=none&encryption=none&host=anten.ir&headerType=http&type=tcp#%25F0%259F%2587%25B9%25F0%259F%2587%25B7%2520%2540ConfigV2RayNG
-trojan://humanity@172.67.180.92:443?path=%2Fassignment&security=tls&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=www.multiplydose.com#%2540ConfigV2RayNG
-vless://23f440d5-a5bb-4472-85ee-8a1750663059@Fans.mahoshid.ir:45471?security=none&encryption=none&headerType=none&type=tcp#ConfigV2RayNG
-vless://1f1aca59-3be0-43b3-bcc1-c653c6aaa922@95.38.242.203:8443?security=none&encryption=none&host=tgju.org&headerType=http&type=tcp#%25F0%259F%2592%25ABConfigV2RayNG

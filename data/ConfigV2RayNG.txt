@@ -1,9 +1,9 @@
-vless://Parsashonam-222@85.133.218.135:443?security=&encryption=none&host=Aparat.com&headerType=http&type=tcp#ConfigV2RayNG-Tunnel
 vless://ee9b0614-50ec-41b6-951b-e1d5d755fa4b@glob.thisiswe.uno:2053?path=%2F%3FTELEGRAM-YamYamProxy_YamYamProxy_YamYamProxy_YamYamProxy_YamYamProxy%3Fed%3D512&security=tls&encryption=none&insecure=0&host=cd11.thisiswe.uno&fp=chrome&type=ws&allowInsecure=0&sni=cd11.thisiswe.uno#%2540ConfigV2RayNG%2520%25F0%259F%258C%2590
 vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@a.pabloping.cloud:2052?mode=auto&path=pabloping&security=none&encryption=none&host=nlbv2.pabloping.pro&type=xhttp#%25E2%25AD%2590%25EF%25B8%258FTelegram%253A%2520%2540ConfigV2RayNG
 vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@b.pabloping.cloud:2052?mode=auto&path=pabloping&security=none&encryption=none&host=nlbv1.pabloping.pro&type=xhttp#%25E2%25AD%2590%25EF%25B8%258FTelegram%253A%2520%2540ConfigV2RayNG
-ss://MjAyMi1ibGFrZTMtY2hhY2hhMjAtcG9seTEzMDU6SG56SU4xQ0xHR0VoK21EL3V6YmJ2VFFjL0FscStoa21yQzdQbzNENGs0RT0@#ConfigV2RayNG%20-%20unknown-SS-7
-ss://Y2hhY2hhMjAtcG9seTEzMDU6NmUzZTQzZjQtMTJiNy00MmYxLThiOTMtNDFhMTUyZDU2MTJk@#ConfigV2RayNG%20-%20unknown-SS-13
+vless://Parsashonam-222@85.133.218.135:443?security=&encryption=none&host=Aparat.com&headerType=http&type=tcp#ConfigV2RayNG-Tunnel
+ss://MjAyMi1ibGFrZTMtY2hhY2hhMjAtcG9seTEzMDU6SG56SU4xQ0xHR0VoK21EL3V6YmJ2VFFjL0FscStoa21yQzdQbzNENGs0RT0@#ConfigV2RayNG%20-%20unknown-SS-6
+ss://Y2hhY2hhMjAtcG9seTEzMDU6NmUzZTQzZjQtMTJiNy00MmYxLThiOTMtNDFhMTUyZDU2MTJk@#ConfigV2RayNG%20-%20unknown-SS-12
 vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@45.130.125.160:2052?mode=auto&path=%2Fpabloping&security=none&encryption=none&host=nlbv1.pabloping.pro&type=xhttp#%25237%2520ConfigV2RayNG
 vless://f16f97fc-f9fa-42f7-8286-fcbaf63f6bb8@87.236.38.66:2087?security=none&encryption=none&host=anten.ir&headerType=http&type=tcp#%252311%2520ConfigV2RayNG
 vless://a4d89b95-0e8a-454a-ab13-f89d22e045f8@3.70.54.228:46860?security=none&encryption=none&headerType=none&type=tcp#%2540ConfigV2RayNG
@@ -19,7 +19,7 @@ vmess://eyJhZGQiOiAiZnJjLnRlYW12LmlyIiwgImFpZCI6ICIwIiwgImFscG4iOiAiaHR0cC8xLjEi
 vless://b3ab86ed-b74f-4ad3-badc-e987fa3ad2c3@gr.v2online3.site:31837?security=none&encryption=none&host=myket.ir&headerType=http&type=tcp#%2540ConfigV2RayNG
 vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.206:26480?security=none&encryption=none&headerType=none&type=tcp#%2540ConfigV2RayNG
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg@3.1.195.148:8316#%2540ConfigV2RayNG%2520%25E2%259C%25A8
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2ZTNlNDNmNC0xMmI3LTQyZjEtOGI5My00MWExNTJkNTYxMmQ@#ConfigV2RayNG%20-%20unknown-SS-53
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2ZTNlNDNmNC0xMmI3LTQyZjEtOGI5My00MWExNTJkNTYxMmQ@#ConfigV2RayNG%20-%20unknown-SS-52
 vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.204:26480?security=none&encryption=none&headerType=none&type=tcp#%2540ConfigV2RayNG
 vless://0f411d3b-4356-4c4c-bd9f-927cbbbca754@iranpet.dtpetshop.com:40433?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=iranpet.dtpetshop.com#%25F0%259F%2587%25BA%25F0%259F%2587%25B8%255BTelegram%253AConfigV2RayNG%255D
 vless://e4f562c4-c14a-4266-adf6-0e7c2d143b9b@gr.v2online3.site:42904?security=none&encryption=none&host=myket.ir&headerType=http&type=tcp#%2540ConfigV2RayNG
@@ -44,9 +44,8 @@ vless://2dc93929-242f-455f-83e4-a85a6a59546a@81.12.46.173:443?security=none&encr
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg@3.1.195.148:8319#%2540ConfigV2RayNG
 vless://8ab5d936-71bc-41f2-8f69-0c8a2f6e5d4d@250.ankernamad.ir:8443?security=none&encryption=none&host=tgju.org&headerType=http&type=tcp#%25F0%259F%25A4%258CConfigV2RayNG
 vless://aab1a536-7a2c-4357-a0e0-8cdde41845c6@glob.thisiswe.uno:8443?path=%2F&security=tls&alpn=http%2F1.1&encryption=none&insecure=0&host=nobitex.sylu.net&fp=chrome&type=ws&allowInsecure=0&sni=nobitex.sylu.net#%25F0%259F%2586%2594%25EF%25B8%258F%252B%257C%252B%2540ConfigV2RayNG%25E3%2580%258E%25F0%259F%2587%25B8%25F0%259F%2587%25A8%25C2%25B9%25E2%2581%25B5%25C2%25B9%25E3%2580%258F
-trojan://347ca311-8fc2-499c-8fe1-bd0ecb50f1b3@5.34.222.4:43642?security=tls&insecure=1&headerType=none&type=tcp&allowInsecure=1&sni=iepl.usq1.cat.bilibili.com#%25F0%259F%2587%25B7%25F0%259F%2587%25BAConfigV2RayNG
-vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.196:26480?security=&encryption=none&headerType=none&type=tcp#%25DA%25A9%25D8%25A7%25D9%2586%25D8%25A7%25D9%2584%2520%25D8%25AA%25D9%2584%25DA%25AF%25D8%25B1%25D8%25A7%25D9%2585%2520%253A%2520ConfigV2RayNG%2540
 vless://02a8c937-e24a-435c-8ea9-5a11c72fff99@45.130.125.96:8443?path=%2Fapi%2Fv1%2Fproduct_id%2F99e98b49-1a2c-40a8-81aa-fd825465d766&security=tls&alpn=http%2F1.1&encryption=none&insecure=0&host=ir.hollowspot.ir&type=ws&allowInsecure=0&sni=ir.hollowspot.ir#ConfigV2RayNG
+vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.196:26480?security=none&encryption=none&headerType=none&type=tcp#ConfigV2RayNG
 vless://ada6ebdd-bdfa-44fb-989c-672051790aeb@v2tr.topacp.store:2053?security=none&encryption=none&headerType=http&type=tcp#ConfigV2RayNG
 vless://472b07d2-31e4-41ab-ae47-48914d9b7900@chatgpt.com:443?mode=gun&security=tls&alpn=h2&encryption=none&insecure=0&fp=chrome&type=grpc&serviceName=Net3rffgrpc&allowInsecure=0&sni=fi.unoix.io#%2540ConfigV2RayNG
 vless://ci49kfwjrc@104.21.17.104:8880?mode=auto&path=%2Fcompass%2Fcdn&security=none&encryption=none&host=ci49kfwjrc-57129121185.hediiigate.com&type=xhttp#ConfigV2RayNG
@@ -99,6 +98,11 @@ vmess://eyJhZGQiOiAiMTA0LjE3Ljc3Ljc3IiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjog
 vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.205:26480?security=&encryption=none&headerType=none&type=tcp#%2540ConfigV2RayNG
 vmess://eyJhZGQiOiAiMTA0LjE3Ljc3Ljc3IiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogInYycmF5MS5kb3phcHAueHl6IiwgImlkIjogIjYwNDQxNTQ4LWI2OGUtNDNiMi04MTkxLWUzYjg4NGJlNGIzYyIsICJpbnNlY3VyZSI6ICIwIiwgIm5ldCI6ICJ3cyIsICJwYXRoIjogIi9sTW5zWlVONC8iLCAicG9ydCI6ICI4NDQzIiwgInBzIjogIkNvbmZpZ1YyUmF5TkcgLSBcdWQ4M2RcdWRkMzdcdWZlMGYgXHUwNmE5XHUwNjI3XHUwNjQ2XHUwNjI3XHUwNjQ0IFx1MDY0NVx1MDYyNyA6IENvbmZpZ1YyUmF5TkdAIiwgInNjeSI6ICJub25lIiwgInNuaSI6ICJ2MnJheTEuZG96YXBwLnh5eiIsICJ0bHMiOiAidGxzIiwgInR5cGUiOiAiLS0tIiwgInYiOiAiMiJ9
 vless://ci49kfwjrc@172.67.175.118:8880?mode=auto&path=%2Fcompass%2Fcdn%2F%3FTELEGRAM--KANAL--JKVPN--JKVPN--JKVPN--JKVPN--JKVPN--JKVPN&security=&encryption=none&host=ci49kfwjrc-57129121185.hediiigate.com&type=xhttp#%2540ConfigV2RayNG%2520%25F0%259F%259A%2580%2520%25DA%25A9%25D8%25A7%25D9%2586%25D9%2581%25DB%258C%25DA%25AF%2520%25D9%2587%25D8%25A7%25DB%258C%2520%25D8%25A8%25DB%258C%25D8%25B4%25D8%25AA%25D8%25B1%2520%25D8%25AF%25D8%25B1%2520%25DA%2586%25D9%2586%25D9%2584
+trojan://347ca311-8fc2-499c-8fe1-bd0ecb50f1b3@5.34.222.4:43642?security=tls&insecure=1&headerType=none&type=tcp&allowInsecure=1&sni=iepl.usq1.cat.bilibili.com#%25F0%259F%2587%25B7%25F0%259F%2587%25BAConfigV2RayNG
+ss://MjAyMi1ibGFrZTMtY2hhY2hhMjAtcG9seTEzMDU6SG56SU4xQ0xHR0VoK21EL3V6YmJ2VFFjL0FscStoa21yQzdQbzNENGs0RT0@#ConfigV2RayNG%20-%20unknown-SS-7
+ss://Y2hhY2hhMjAtcG9seTEzMDU6NmUzZTQzZjQtMTJiNy00MmYxLThiOTMtNDFhMTUyZDU2MTJk@#ConfigV2RayNG%20-%20unknown-SS-13
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2ZTNlNDNmNC0xMmI3LTQyZjEtOGI5My00MWExNTJkNTYxMmQ@#ConfigV2RayNG%20-%20unknown-SS-53
+vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.196:26480?security=&encryption=none&headerType=none&type=tcp#%25DA%25A9%25D8%25A7%25D9%2586%25D8%25A7%25D9%2584%2520%25D8%25AA%25D9%2584%25DA%25AF%25D8%25B1%25D8%25A7%25D9%2585%2520%253A%2520ConfigV2RayNG%2540
 vless://ee9b0614-50ec-41b6-951b-e1d5d755fa4b@glob.thisiswe.uno:2053?path=%2F&security=tls&encryption=none&insecure=1&host=cd11.thisiswe.uno&fp=chrome&type=ws&allowInsecure=1&sni=cd11.thisiswe.uno#%25E2%259C%25A8%2520%2540ConfigV2RayNG%2520%257C%2520%25E2%259D%25A4%25EF%25B8%258F%2520%25D9%2588%25D8%25B5%25D9%2584%2520%25D8%25B4%25D8%25AF%25DB%258C%2520%25D8%25AC%25D9%2588%25DB%258C%25D9%2586%2520%25D8%25B4%25D9%2588%2520%257C%2520%25F0%259F%259A%2580%2520%257C%2520%25F0%259F%2587%25B8%25F0%259F%2587%25A8
 vless://5cfbed15-e39a-4067-b20b-9243bfb8c234@3.72.62.160:15200?security=none&encryption=none&headerType=none&type=tcp#%25E2%259C%25A8%2520%2540ConfigV2RayNG%2520%257C%2520%25E2%259D%25A4%25EF%25B8%258F%2520%25D9%2588%25D8%25B5%25D9%2584%2520%25D8%25B4%25D8%25AF%25DB%258C%2520%25D8%25AC%25D9%2588%25DB%258C%25D9%2586%2520%25D8%25B4%25D9%2588%2520%257C%2520%25F0%259F%259A%2580%2520%257C%2520%25F0%259F%2587%25A9%25F0%259F%2587%25AA
 hysteria2://b4bd0613-ff7c-4f2f-954d-185915e6ddad@5.175.249.174:35000?security=tls&obfs=salamander&obfs-password=%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi&insecure=0&sni=api.kermanshahi.org#%2540ConfigV2RayNG
@@ -120,7 +124,6 @@ vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@188.114.98.0:2052?mode=auto&path=%2
 vless://ada6ebdd-bdfa-44fb-989c-672051790aeb@v2tr.topacp.store:2053?security=&encryption=none&headerType=http&type=tcp#%25E2%2599%259B%2520ConfigV2RayNG
 vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@c.pabloping.cloud:2052?mode=auto&path=%2Fpabloping&security=none&encryption=none&host=upnl.pabloping.pro&type=xhttp#%25E3%2580%258E%2520%2540ConfigV2RayNG%2520%25E2%2597%2587%25E2%2583%259F%25F0%259F%2592%258E%2520%25E3%2580%258F
 ss://MjAyMi1ibGFrZTMtY2hhY2hhMjAtcG9seTEzMDU6SG56SU4xQ0xHR0VoK21EL3V6YmJ2VFFjL0FscStoa21yQzdQbzNENGs0RT0@#ConfigV2RayNG%20-%20unknown-SS-3
-vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.195.196:26480?security=none&encryption=none&headerType=none&type=tcp#ConfigV2RayNG
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg@3.112.130.53:8319#ConfigV2RayNG
 vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@b.pabloping.cloud:2052?mode=auto&path=%2Fpabloping&security=none&encryption=none&host=nlbv2.pabloping.pro&type=xhttp#%25E3%2580%258E%2520%2540ConfigV2RayNG%2520%25E2%2597%2587%25E2%2583%259F%25F0%259F%2592%258E%2520%25E3%2580%258F
 vless://ee9b0614-50ec-41b6-951b-e1d5d755fa4b@glob.thisiswe.uno:2053?path=%2F&security=tls&encryption=none&insecure=1&host=cd11.thisiswe.uno&fp=chrome&type=ws&allowInsecure=1&sni=cd11.thisiswe.uno#%25F0%259F%259A%2580Telegram%2520%253D%2520%2540ConfigV2RayNG
@@ -295,6 +298,3 @@ ss://Y2hhY2hhMjAtcG9seTEzMDU6NmUzZTQzZjQtMTJiNy00MmYxLThiOTMtNDFhMTUyZDU2MTJk@#C
 vless://fca0195d-ff19-49c1-8db0-3aa46df882fa@my-o9.rexine.ir:443?security=none&encryption=none&host=mir-data-37.myket.ir&headerType=http&type=tcp#%25F0%259F%2587%25A9%25F0%259F%2587%25AA%2520ConfigV2RayNG
 vless://bdf97c06-ae1f-47e9-b47a-9d9ff47b5820@62.60.219.90:47880?security=none&encryption=none&host=skyroom.online&headerType=http&type=tcp#%2540ConfigV2RayNG
 vless://ad14240e-196b-405b-8628-229295d20d7f@tu4.bing-net.com:3046?security=none&encryption=none&host=varzesh3.com&headerType=http&type=tcp#ConfigV2RayNG
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg@3.1.195.148:8316#telegram%2520%2540ConfigV2RayNG
-vless://6919e588-cff3-4c1b-b7a3-3ca0ada5fb69@85.133.200.78:26480?security=none&encryption=none&headerType=none&type=tcp#ConfigV2RayNG
-vless://fca0195d-ff19-49c1-8db0-3aa46df882fa@my-o6.rexine.ir:1717?security=none&encryption=none&host=mir-data-62.myket.ir&headerType=http&type=tcp#%25F0%259F%2587%25AE%25F0%259F%2587%25B9%2520ConfigV2RayNG

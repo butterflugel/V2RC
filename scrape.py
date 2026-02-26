@@ -7,24 +7,25 @@ import random
 import time
 import urllib.parse
 import base64
+import hashlib
 
 CONFIG_REGEX = re.compile(
-    r'(vmess://[^\s<>\[\]]+|vless://[^\s<>\[\]]+|trojan://[^\s<>\[\]]+|ss://[^\s<>\[\]]+|hysteria2://[^\s<>\[\]]+|hysteria://[^\s<>\[\]]+)'
+    r'(vmess://[^\s<>\[\]]+|vless://[^\s<>\[\]]+|trojan://[^\s<>\[\]]+|ss://[^\s<>\[\]]+|'
+    r'hysteria2://[^\s<>\[\]]+|hysteria://[^\s<>\[\]]+|socks://[^\s<>\[\]]+)'
 )
 
 DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
 CHANNELS_FILE = "channels.json"
-MAX_CONFIGS_PER_CHANNEL = 300
+MAX_CONFIGS_PER_CHANNEL = 400
 MAX_PAGES_PER_CHANNEL = 15
 REQUEST_TIMEOUT = 15
 
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+    "Mozilla/5.0 (X11; Linux x86_64)",
 ]
 
 def fix_b64(s: str) -> str:
@@ -33,9 +34,11 @@ def fix_b64(s: str) -> str:
 def get_random_headers():
     return {
         "User-Agent": random.choice(USER_AGENTS),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
+        "Accept": "*/*",
     }
+
+def hash_key(s: str) -> str:
+    return hashlib.sha256(s.encode()).hexdigest()
 
 def get_config_unique_key(link: str) -> str:
     try:
@@ -45,69 +48,82 @@ def get_config_unique_key(link: str) -> str:
         if scheme == 'vmess':
             decoded = base64.urlsafe_b64decode(fix_b64(parsed.path)).decode()
             config = json.loads(decoded)
-            return f"vmess:{config.get('add')}:{config.get('port')}:{config.get('id')}"
 
-        elif scheme in ['vless', 'trojan', 'hysteria', 'hysteria2']:
-            return f"{scheme}:{parsed.netloc}"
+            identity = f"{config.get('add')}:{config.get('port')}:{config.get('id')}"
+            return hash_key(identity)
+
+        elif scheme in ['vless', 'trojan', 'hysteria', 'hysteria2', 'socks']:
+            identity = f"{scheme}:{parsed.hostname}:{parsed.port}:{parsed.username}"
+            return hash_key(identity)
 
         elif scheme == 'ss':
-            data = parsed.netloc or parsed.path
-            return f"ss:{data}"
+            return hash_key(parsed.netloc or parsed.path)
 
-        return link
+        return hash_key(link)
+
     except:
-        return link
+        return hash_key(link)
 
-def clean_and_normalize_config(raw_link: str, channel_name: str, index: int = 0) -> str:
+def normalize_config(raw_link: str, channel_name: str) -> str:
     try:
-        scheme = raw_link.split('://')[0].lower()
+        scheme = raw_link.split("://")[0].lower()
 
-        if scheme == 'vmess':
-            b64 = raw_link.split('://')[1]
+        if scheme == "vmess":
+            b64 = raw_link.split("://")[1]
             decoded = base64.urlsafe_b64decode(fix_b64(b64)).decode()
             config = json.loads(decoded)
 
-            remark = config.get('ps', '').strip()
-            if not remark:
-                remark = f"{channel_name} - VMESS-{index}"
+            # force clean remark
+            config["ps"] = channel_name
 
-            config['ps'] = f"{channel_name} - {remark[:50]}"
-            new_b64 = base64.urlsafe_b64encode(json.dumps(config).encode()).decode().rstrip("=")
+            new_b64 = base64.urlsafe_b64encode(
+                json.dumps(config, separators=(",", ":")).encode()
+            ).decode().rstrip("=")
+
             return f"vmess://{new_b64}"
 
         else:
             parsed = urllib.parse.urlparse(raw_link)
-            remark = parsed.fragment.strip()
-            if not remark:
-                host = parsed.hostname or "unknown"
-                remark = f"{channel_name} - {host}-{parsed.scheme.upper()}-{index}"
 
-            new_url = urllib.parse.urlunparse((
+            # remove any existing fragment
+            clean_url = urllib.parse.urlunparse((
                 parsed.scheme,
                 parsed.netloc,
                 parsed.path,
                 parsed.params,
                 parsed.query,
-                urllib.parse.quote(remark)
+                channel_name
             ))
-            return new_url
+
+            return clean_url
+
     except:
         return raw_link
 
 def scrape_channel(base_url: str, name: str):
-    print(f"\nScraping {name} → {base_url}")
-    new_configs = []
-    seen_keys = set()
-    url = base_url.rstrip('/')
+    print(f"\nScraping {name}")
+    url = base_url.rstrip("/")
     page_count = 0
-    global_index = 0
+
+    outfile = DATA_DIR / f"{name}.txt"
+
+    existing_configs = []
+    existing_keys = set()
+
+    if outfile.exists():
+        existing_configs = outfile.read_text(encoding="utf-8").splitlines()
+        for cfg in existing_configs:
+            existing_keys.add(get_config_unique_key(cfg))
+
+    new_configs = []
+    new_keys = set()
 
     while page_count < MAX_PAGES_PER_CHANNEL:
         page_count += 1
-        print(f"  Page {page_count} → {url}")
+        print(f"  Page {page_count}")
 
         try:
-            time.sleep(random.uniform(2, 5))
+            time.sleep(random.uniform(2, 4))
             r = requests.get(url, headers=get_random_headers(), timeout=REQUEST_TIMEOUT)
             r.raise_for_status()
         except Exception as e:
@@ -118,7 +134,6 @@ def scrape_channel(base_url: str, name: str):
         messages = soup.select("div.tgme_widget_message")
 
         if not messages:
-            print("  No messages found — Telegram layout may have changed")
             break
 
         oldest_id = None
@@ -132,12 +147,13 @@ def scrape_channel(base_url: str, name: str):
             found = CONFIG_REGEX.findall(text)
 
             for raw in found:
-                global_index += 1
-                key = get_config_unique_key(raw)
-                if key in seen_keys:
+                clean = normalize_config(raw, name)
+                key = get_config_unique_key(clean)
+
+                if key in existing_keys or key in new_keys:
                     continue
-                seen_keys.add(key)
-                clean = clean_and_normalize_config(raw, name, global_index)
+
+                new_keys.add(key)
                 new_configs.append(clean)
 
             post = msg.get("data-post")
@@ -149,18 +165,14 @@ def scrape_channel(base_url: str, name: str):
                 except:
                     pass
 
-        print(f"  Added {len(new_configs)} total configs so far")
-
         if not oldest_id:
             break
+
         url = f"{base_url}?before={oldest_id}"
 
-    outfile = DATA_DIR / f"{name}.txt"
-    old = []
-    if outfile.exists():
-        old = outfile.read_text(encoding="utf-8").splitlines()
+    combined = new_configs + existing_configs
+    combined = combined[:MAX_CONFIGS_PER_CHANNEL]
 
-    combined = list(dict.fromkeys(new_configs + old))[:MAX_CONFIGS_PER_CHANNEL]
     outfile.write_text("\n".join(combined) + "\n", encoding="utf-8")
 
     print(f"Saved {len(combined)} configs → {outfile}")
@@ -175,7 +187,6 @@ def main():
 
     for name, url in channels.items():
         if not url.startswith("https://t.me/s/"):
-            print(f"Skipping {name}: invalid URL")
             continue
         scrape_channel(url, name)
 

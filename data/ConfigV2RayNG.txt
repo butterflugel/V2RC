@@ -1,3 +1,4 @@
+vless://f2f7ebdf-f163-4d6f-9901-9ea9bf06d6f5@212.80.24.71:777?path=%40BlueberryNetWork&security=none&encryption=none&type=ws#ConfigV2RayNG
 vless://aa302418-508d-07d0-885e-c8418e6956bd@109.120.189.112:51006?mode=packet-up&security=reality&encryption=none&extra=null&pbk=4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik&fp=qq&type=xhttp&sni=max.ru&sid=d8c6b58bcbb0c323#ConfigV2RayNG
 vless://aa302418-508d-2710-885e-c8418e6956bd@109.120.189.112:51006?mode=packet-up&security=reality&encryption=none&extra=null&pbk=4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik&fp=qq&type=xhttp&sni=max.ru&sid=d8c6b58bcbb0c323#ConfigV2RayNG
 vless://aa302418-508d-0bb8-885e-c8418e6956bd@109.120.189.112:51006?mode=packet-up&security=reality&encryption=none&extra=null&pbk=4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik&fp=qq&type=xhttp&sni=max.ru&sid=d8c6b58bcbb0c323#ConfigV2RayNG

@@ -1,3 +1,5 @@
+hysteria2://b4bd0613-ff7c-4f2f-954d-185915e6ddad@5.175.249.174:35000?security=tls&obfs=salamander&obfs-password=%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi&insecure=0&sni=api.kermanshahi.org#ConfigV2RayNG
+hysteria2://b4bd0613-ff7c-4f2f-954d-185915e6ddad@181.214.99.162:35000?security=tls&obfs=salamander&obfs-password=%40JavidnamanIran-Javid-SHAH-KingRezaPahlavi&insecure=0&sni=api.kermanshahi.org#ConfigV2RayNG
 vless://cf25f9d0-408f-1142-30aa-01ead41c420d@151.101.9.81:80?mode=auto&path=%2Fassets%2Fcss%2Fstyle.css%3Fed&security=none&encryption=none&host=grokgpt.ai&type=xhttp#ConfigV2RayNG
 ss://MjAyMi1ibGFrZTMtY2hhY2hhMjAtcG9seTEzMDU6SG56SU4xQ0xHR0VoK21EL3V6YmJ2VFFjL0FscStoa21yQzdQbzNENGs0RT0@#ConfigV2RayNG
 ss://Y2hhY2hhMjAtcG9seTEzMDU6NmUzZTQzZjQtMTJiNy00MmYxLThiOTMtNDFhMTUyZDU2MTJk@#ConfigV2RayNG
@@ -296,5 +298,3 @@ vless://b7ee8185-a285-7f38-4e42-411da1656523@cf2.bntabriz.ir:443?mode=packet-up&
 vless://c5da451e-4597-4abf-c102-d573d78d2bb2@193.58.119.134:443?security=&encryption=none&host=google.com&headerType=http&type=tcp#ConfigV2RayNG
 trojan://BxceQaOe@16.163.102.116:52951?security=tls&insecure=1&headerType=none&type=tcp&allowInsecure=1&sni=t.me%252Fripaojiedian#ConfigV2RayNG
 vless://9706248e-259e-4738-9cde-a3f7e11be4b8@185.208.79.133:38463?security=&encryption=none&headerType=none&type=tcp#ConfigV2RayNG
-vless://ci49kfwjrc@104.21.17.104:8880?mode=auto&path=%2Fcompass%2Fcdn%2F%3FI&security=&encryption=none&host=ci49kfwjrc-57129121185.hediiigate.com&type=xhttp#ConfigV2RayNG
-vless://dd0cfef0-fda9-47ec-8a65-49d7bc004f82@104.21.18.41:443?path=%2F--Telegram---%40MiTiVPN%2F---%40MiTiVPN%3F%2FTelegram-MTMVPN---Telegram-MTMVPN---Telegram-MTMVPN---Telegram-MTMVPN---Telegram-MTMVPN---Telegram-MTMVPN---Telegram-MTMVPN%3Fed%3D2560&security=tls&alpn=http%2F1.1&encryption=none&insecure=0&host=mitivpn-2.nic3-1.workers.dev&fp=chrome&type=ws&allowInsecure=0&sni=nic3-1.workers.dev#ConfigV2RayNG

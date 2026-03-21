@@ -1,3 +1,9 @@
+vless://80487a78-4fdd-4d7a-a355-5a7c6108ddaa@94.101.179.197:443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=archive-azd1101.telewebion.ir&sid=6ba85179e30d4fc2#FileMBad
+vless://56a210bb-8c6b-4148-80bc-2fec5099cb98@c27.prodnsspeed10.ir:2083?mode=multi&security=tls&encryption=none&insecure=0&fp=chrome&type=grpc&serviceName=Love&allowInsecure=0&sni=so.sodogodping.ir#FileMBad
+vless://3f0f36f5-f091-45c5-88c9-4bcc545b922c@www.speedtest.net:2096?path=%2F45.76.183.217%3D49292&security=tls&encryption=none&insecure=0&host=hetz.x-smm.com&type=ws&allowInsecure=0&sni=hetz.x-smm.com#FileMBad
+vless://387f29b3-54dd-48b8-a719-5b63a3ec9d56@partners.dissertationhelpspecialist.com:2053?mode=gun&security=reality&encryption=none&pbk=Rg_kmzAWcfHm-kp4u3u73sFieCsKmxLBKtY-AKZe-Bc&fp=firefox&spx=%2F&type=grpc&serviceName=SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet-SevenNet&sni=tgju.org&sid=ae85668c#FileMBad
+vless://6cabb434-f480-478a-9586-a5667167eeb1@91.84.126.28:8443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=images.apple.com&pbk=tZ-tscsitfHIe63_9FAqruCnJaNFhRaKCnR8G-e4-CM&sid=ae#FileMBad
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#FileMBad
 vless://0d9b67db-45a5-4953-a64f-a9299ad210d9@77.83.245.135:34205?encryption=none&security=none&type=tcp#FileMBad
 vless://b7cffc01-eab9-4659-b8d6-c5786295a731@185.211.59.104:8443?type=ws&encryption=none&path=%2F&host=&security=none#FileMBad
 vless://5cc82fdd-847a-4b11-9f91-3d8f35ff9e09@farzandeiran.iransalar.top:21531?security=none&encryption=none&headerType=none&type=tcp#FileMBad
@@ -292,9 +298,3 @@ vless://448432c3-2726-43f6-9dd4-9fa05ec875fa@91.192.160.5:38916?encryption=none&
 vless://1667c559-b95b-490e-a45b-4c3ea2b1c52d@www.genshinclub.ir:443?encryption=none&security=reality&sni=movie.genshinclub.ir&fp=firefox&pbk=7RnHm0iBdV4mH-3xQ-2urtMp6OMPJ0fGRA3RBV8dino&sid=f04818bf&spx=%2Fx4gTrPMZ7ZRHF4C&type=tcp&headerType=none#FileMBad
 vless://29eb504a-f25f-4d5d-ac7f-d643ec83686e@starv1.meepo1.com:19971?encryption=none&security=none&type=tcp&headerType=none#FileMBad
 vless://c1b21f1a-4b8f-442a-9b2a-f0d7892b9ee9@s2.bookeeper.space:1010?security=none&encryption=none&headerType=none&type=tcp#FileMBad
-vless://05a17ccb-a231-4e8c-af1a-810691c27d88@vip2.xqfire.ir:811?encryption=none&security=none&type=tcp&headerType=none#FileMBad
-vless://6492fd55-4ab8-4da5-bed4-83e5c3f5b178@www.goldenshopify.ir:2031?encryption=none&security=none&type=tcp&headerType=none#FileMBad
-vless://948fac3c-42bf-41a6-a5f9-704d36ff0d8d@104.207.157.238:8443?security=tls&type=ws&path=%2Fdanfeng&host=chinam.sylu.net&alpn=http%2F1.1&sni=chinam.sylu.net&fp=random#FileMBad
-vless://42a7df85-0739-4760-a248-32a491abfa2a@77.92.145.192:443?security=reality&flow=xtls-rprx-vision&sni=hls-svod.itunes.apple.com&type=tcp&fp=chrome&pbk=mLmBhbVFfNuo2eUgBh6r9-5Koz9mUCn3aSzlR6IejUg&sid=e499f276e7bd6420#FileMBad
-vless://6ca2c654-53b3-4ac1-a2ef-c4b4ee88727a@45.136.128.175:443?security=tls&encryption=none&headerType=none&type=tcp&sni=kzcdn1.suio.me#FileMBad
-vless://6dfbef3b-f718-4053-806f-c9657e2fd943@us.jljd.xyz:11225?security=reality&encryption=none&pbk=nRUFKXfldeXh6hIoO6hAeBC3NtUHhaHyNkOeNGyjsjk&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=python.org&sid=fcc5f0e9#FileMBad

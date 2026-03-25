@@ -1,3 +1,13 @@
+vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@91.107.129.147:23142?security=none&type=ws&path=%2F&host=i#FileMBad
+vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@cloud.vpsino.com:48324?security=none&type=tcp&headerType=none&path=%2F#FileMBad
+vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@185.143.234.122:80?security=none&type=ws&path=%2F&host=o#FileMBad
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@193.29.139.206:8080?type=tcp#FileMBad
+vless://ecd01b9c-8172-41a4-be72-6167fd7d932d@104.19.140.106:443?path=%2F139.99.124.165&security=tls&encryption=none&insecure=1&host=afrcloud1.c01.kr&type=ws&allowInsecure=1&sni=afrcloud1.c01.kr#FileMBad
+vless://05519058-d2ac-4f28-9e4a-2b2a1386749e@63.176.237.255:22224?path=%2Ftelegram-channel-vlessconfig&security=tls&encryption=none&insecure=0&type=ws&allowInsecure=0&sni=trojan.burgerip.co.uk#FileMBad
+vless://46063237-3655-482f-947e-7f79dc5de2a5@hamrahiran.sorenashoping.xyz:45571?path=%2F&security=none&encryption=none&type=ws#FileMBad
+vless://7af62976-d22d-4ba9-bb5c-c97f6053fbf6@mlh.mynethub99.top:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=mlh.mynethub99.top#FileMBad
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.199:8080#FileMBad
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpaRFh3Y0ZvSnpGYlFwUU5DZmpFTXl4VFVmWldZczF3Qw==@37.139.32.113:1080#FileMBad
 vless://951f9bc7-6c27-5429-a583-4ab190878472@cloud.vpsino.com:48324?security=none&type=tcp&headerType=none&path=%2F#FileMBad
 trojan://humanity@chatgpt.com:443?path=%2Fassignment&security=tls&insecure=0&host=www.gossipglove.com&fp=chrome&type=ws&allowInsecure=0&sni=www.gossipglove.com#FileMBad
 vless://8d144af5-b97c-4449-bde6-2b3056f54844@hamrahiran.sorenashoping.xyz:45571?path=%2F&security=none&encryption=none&type=ws#FileMBad
@@ -288,13 +298,3 @@ vless://bb29ad39-9249-47f9-a8e0-122b8621c296@tu3.bing-net.com:3049?security=none
 vless://05519058-d2ac-4f28-9e4a-2b2a1386749e@18.159.228.130:22224?type=ws&security=tls&path=%2Ftelegram-channel-vlessconfig&sni=trojan.burgerip.co.uk#FileMBad
 vless://bb29ad39-9249-47f9-a8e0-122b8621c296@172.64.152.23:2086?path=%2F&security=none&encryption=none&host=a3ssa.vaslbsh.com&type=httpupgrade#FileMBad
 trojan://telegram-id-privatevpns@18.159.228.130:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#FileMBad
-vless://db3cf6e8-515a-47e0-8572-eb47bb611fb2@185.143.233.120:443?type=ws&security=tls&host=alef.ir.oadeflantrogm.realirshop.com&path=%2F%3Fed%3D443&sni=alef.ir.oadeflantrogm.realirshop.com&fp=randomized#FileMBad
-vless://e1a9ff20-1111-4f5a-a395-123456789abc@79.175.177.239:443?security=reality&encryption=none&pbk=h5qv72RabKBmp7LFCI8y_CcqpUzRYi_W9tWTdKnzTUI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.aparat.com&sid=a1b2c3d4#FileMBad
-vless://508d2a9e-9b59-423d-a1db-c4f5217f1866@rc99.shekast.xyz:443?hiddify=1&sni=rc99.shekast.xyz&type=grpc&alpn=h2&path=npGftsQS14qEr9depcn&host=rc99.shekast.xyz&serviceName=npGftsQS14qEr9depcn&mode=gun&encryption=none&fp=chrome&headerType=none&allowInsecure=true&insecure=true&security=tls#FileMBad
-vless://e45c6bc1-a7a2-46b5-a6ee-966886c7e43d@meeeliii.marzabarvana.com:5355?encryption=none&type=ws&path=/#FileMBad
-vless://e349eeee-169a-4e50-9512-7a6cfddbf8ee@meeeliii.marzabarvana.com:5355?path=%2F&security=none&encryption=none&type=ws#FileMBad
-vless://b61bbb10-5e11-45df-8a3f-c041f24b2156@85.133.197.111:19996?security=none&encryption=none&headerType=none&type=tcp#FileMBad
-vless://86a0b881-10a8-0541-151f-d161aa99380a@cloud3.vpsino.com:6344?security=none&encryption=none&headerType=none&type=tcp#FileMBad
-vless://d366c868-1aa4-46f4-bf6d-62e6a430b1f7@185.143.233.5:80?path=%2Fgraphql%3Fed%3D30&security=none&encryption=none&host=dulphin111-90331252af-viv.apps.ir-central1.arvancaas.ir&type=ws#FileMBad
-vless://b914d8bc-50bc-46c5-8e5a-c8a976089073@mlh.mynethub99.top:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=mlh.mynethub99.top#FileMBad
-vmess://eyJhZGQiOiJtZWwuaWRiZWRlLmNvbSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiIxMmQ1ZTk0MC00Y2ZjLTQyOTQtYjQ3OS00MTk1YzI5ZGJjMzUiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6Ijg0NDMiLCJwcyI6IkZpbGVNQmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ

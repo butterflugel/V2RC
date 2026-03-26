@@ -1,3 +1,11 @@
+vless://c5f28348-2cd8-4e98-a819-2d5cbc6b9e53@voip9.divar.mom:55009?security=reality&allowInsecure=0&encryption=none&type=tcp&sni=www.digikala.com&sid=c385&fp=chrome&pbk=vxdmULi_cO7dha2aQnsjSViARO15hvI9HWyo0pVPlkQ&headerType=none#FileMBad
+vless://e2b8e693-ba8f-4b84-bd43-ef43627d2edf@snapp.ir:80?path=%2F&security=none&encryption=none&host=dl.avenflow.ir&type=ws#FileMBad
+vless://f0b48d33-0733-4a2e-811f-a87fd1e7b32a@snapp.ir:80?path=%2F&security=none&encryption=none&host=dl2.avenflow.ir&type=ws#FileMBad
+vless://5da2fc9e-7c8e-4e1a-90fd-7843a3a2cb7b@snapp.ir:80?path=%2F&security=none&encryption=none&host=dl.avenflow.ir&type=ws#FileMBad
+vless://e304a3db-fe6c-45fa-b88b-45dacca9090c@omgspacir.clearpa66thdata.shop:48091?encryption=none&type=tcp&headerType=none#FileMBad
+vless://9f762e59-3579-44c0-ac9d-cd4b88b28352@hamrahiran.sorenashoping.xyz:45571?path=%2F&security=none&encryption=none&type=ws#FileMBad
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.199:8080#FileMBad
+vless://d913751b-3ce4-493f-9adb-65bbfc02c991@199.232.242.127:80?type=xhttp&encryption=none&path=%2Fmgvpnir%3Fed%3D2560&host=mgvpniryour-name.global.ssl.fastly.net&mode=auto&security=none#FileMBad
 vless://cd049f4d-56e5-4412-a1d2-e892ee83aec8@snapp.ir:80?path=%2F&security=none&encryption=none&host=dl2.avenflow.ir&type=ws#FileMBad
 vless://12591d12-3b00-4b66-bb88-3194ed3a12b3@snapp.ir:80?path=%2F&security=none&encryption=none&host=es.frostcomic.com&type=ws#FileMBad
 vless://57ba2ab1-a283-42eb-82ee-dc3561a805b8@172.67.153.156:8443?encryption=none&security=tls&sni=ovhwuxian.pai50288.uk&type=ws&host=ovhwuxian.pai50288.uk&path=%2F57ba2ab1#FileMBad
@@ -290,11 +298,3 @@ vless://b914d8bc-50bc-46c5-8e5a-c8a976089073@mlh.mynethub99.top:443?type=tcp&enc
 vless://d366c868-1aa4-46f4-bf6d-62e6a430b1f7@185.143.233.5:80?path=%2Fgraphql%3Fed%3D30&security=none&encryption=none&host=dulphin111-90331252af-viv.apps.ir-central1.arvancaas.ir&type=ws#FileMBad
 vmess://eyJhZGQiOiJtZWwuaWRiZWRlLmNvbSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiIxMmQ1ZTk0MC00Y2ZjLTQyOTQtYjQ3OS00MTk1YzI5ZGJjMzUiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6Ijg0NDMiLCJwcyI6IkZpbGVNQmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ
 vless://db3cf6e8-515a-47e0-8572-eb47bb611fb2@185.143.233.120:443?type=ws&security=tls&host=alef.ir.oadeflantrogm.realirshop.com&path=%2F%3Fed%3D443&sni=alef.ir.oadeflantrogm.realirshop.com&fp=randomized#FileMBad
-vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@91.107.129.147:23142?security=none&type=ws&path=%2F&host=i#FileMBad
-vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@cloud.vpsino.com:48324?security=none&type=tcp&headerType=none&path=%2F#FileMBad
-vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@185.143.234.122:80?security=none&type=ws&path=%2F&host=o#FileMBad
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@193.29.139.206:8080?type=tcp#FileMBad
-vless://ecd01b9c-8172-41a4-be72-6167fd7d932d@104.19.140.106:443?path=%2F139.99.124.165&security=tls&encryption=none&insecure=1&host=afrcloud1.c01.kr&type=ws&allowInsecure=1&sni=afrcloud1.c01.kr#FileMBad
-vless://05519058-d2ac-4f28-9e4a-2b2a1386749e@63.176.237.255:22224?path=%2Ftelegram-channel-vlessconfig&security=tls&encryption=none&insecure=0&type=ws&allowInsecure=0&sni=trojan.burgerip.co.uk#FileMBad
-vless://46063237-3655-482f-947e-7f79dc5de2a5@hamrahiran.sorenashoping.xyz:45571?path=%2F&security=none&encryption=none&type=ws#FileMBad
-vless://7af62976-d22d-4ba9-bb5c-c97f6053fbf6@mlh.mynethub99.top:443?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&sni=mlh.mynethub99.top#FileMBad

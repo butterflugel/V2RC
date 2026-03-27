@@ -1,3 +1,10 @@
+vless://1d56dee0-4c2c-4d1b-a6b8-6fea50aa43e5@w3star.meepo1.com:8080?security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&headerType=http&fp=chrome&type=tcp#FileMBad
+vless://420349f3-6024-4457-bde6-b3d11183d728@31.216.62.198:20391?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://0275db2c-f518-43bd-ac3b-1f89bc4fbbd8@213.177.176.182:8081?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://jLfvxOCifeczbZzXzG9rpeJfob0UfQVRQakTW9FKBaMK2oa6riGPVL+J7XR/MiX4lX/ihiK5XDCNXVwSuzsgal15CFONfJbVuAE+ASW4Yuzvl1PoyGVJfRLhiN3tyJQbYiWUwcgviWN1KxO0XJnbSVm/h6dySE3xth4eGaha0HEyOOVA/sCdeibSHhWMOBkGuvebLwhWw/3cw1I1Cq4lOw==#FileMBad
+trojan://dbyDzDexiy3CrH7Q8qwYD8PKbVMsgZYiJQ9z364ydNYfEPW00b367MCKWJCBuQsCOI269VzfbN2qJN09oHSFxL9CeFTlozL6A15sNgYOBxzT0llDQuACIWZexy9cAZW+JlqmomGkLPxEn21wNPQNUw==#FileMBad
+vless://907ccc0f-bd56-4726-a877-d72a02125b6c@3.120.175.42:443?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://3cbad916-d882-4773-8dfb-15564f2d29fe@zone.ca.f2zone.ir:17759?security=none&encryption=none&host=telewebion.com&headerType=http&type=tcp#FileMBad
 vless://75c2e936-cf92-4bb1-f6c4-7a1f777f59cb@atlas.irpairinghosting24.org:4051?security=none&encryption=none&headerType=none&type=tcp#FileMBad
 vless://3757a383-ca03-4d85-a4f0-5c9602a8949a@webb.gdsrguydsrghj.ir:1010?security=&encryption=none&headerType=http&type=tcp#FileMBad
 vless://20285e4f-b0db-48a6-92a2-1b5677cb65ad@ja3.diiginet.ir:1500?security=none&encryption=none&host=reata.ir&headerType=http&type=tcp#FileMBad
@@ -291,10 +298,3 @@ vmess://eyJhZGQiOiJtZWwuaWRiZWRlLmNvbSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJo
 vmess://eyJhZGQiOiJtZWwuaWRiZWRlLmNvbSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiI0N2NhN2U4OC1lOTZkLTQ0YWItOThjZC1jYzlhOGYzODc1ODYiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6Ijg0NDMiLCJwcyI6IkZpbGVNQmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ
 vless://c3ffd8a9-ba3b-44d1-b2da-898084769ecd@hamrahiran.sorenashoping.xyz:58179?security=none&encryption=none&host=Fast.com&headerType=http&type=tcp#FileMBad
 vless://fb2c0e80-a66c-4132-9b90-509d4ed369d5@SofeWhite.legendperm.ir:4722?security=none&encryption=none&headerType=http&type=tcp#FileMBad
-vless://05519058-d2ac-4f28-9e4a-2b2a1386749e@63.177.162.163:22224?path=%2Ftelegram-channel-vlessconfig&security=tls&encryption=none&insecure=0&type=ws&allowInsecure=0&sni=trojan.burgerip.co.uk#FileMBad
-vless://03f75e80-2bfd-5608-cc7c-20eb54ddeab8@cloud3.vpsino.com:6344?security=none&encryption=none&headerType=none&type=tcp#FileMBad
-vless://b7ed3ee1-1e02-4024-89f0-b7e497d57b35@mrvip.novavp.xyz:48671?type=tcp&security=none#FileMBad
-vless://d5ac7b96-3026-e1bf-a68e-ed0073231dba@cloud.vpsino.com:48324?security=none&type=tcp&headerType=none&encryption=none#FileMBad
-vless://d42c4b49-71b9-4bfb-bd4e-367f649c5822@omgspacir.clearpa66thdata.shop:41647?security=none&encryption=none&headerType=none&type=tcp#FileMBad
-vless://e70d6fe1-6f19-4953-8f46-cc0c491f44fb@blog3.gelatocabana.ir:443/?type=tcp&encryption=none&security=none#FileMBad
-vless://34391df6-e046-1735-b79a-221aa99572ec@cloud3.vpsino.com:6344?security=none&encryption=none&headerType=none&type=tcp#FileMBad

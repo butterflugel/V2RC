@@ -1,3 +1,10 @@
+vless://12dfd018-f534-43a9-8492-1458ce9a500e@app.palmal.site:45124?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://8f3f467e-bf21-41ce-99ea-46625fae1142@185.143.234.122:80?path=%2F&security=none&encryption=none&host=amm3.avenflow.ir&type=ws#FileMBad
+vless://b02effa1-9f10-46db-a677-dea15fcccb95@vix.idcenter.top:80?security=none&encryption=none&host=vix.idcenter.top&type=ws#FileMBad
+vless://7e296434-2d17-48d3-928d-19eaa34aecb1@45.15.170.80:28495?security=reality&encryption=none&pbk=KXMH8QzaRa66F6GxOR1CanBunO2uHdJvri2zCbar2RQ&headerType=none&fp=chrome&type=tcp&sni=dl.google.com&sid=0ecc2c1392#FileMBad
+vless://fae38aae-0342-4752-834d-3f7d2ec58ea8@172.237.128.199:443?type=xhttp&path=/&host=&mode=stream-one&security=none#FileMBad
+vless://50390dae-1bdb-11f1-9350-92000723b4ab@dlc-new9.persianpinggame.com:5109?security=none&encryption=none&host=filmnet.ir&headerType=http&type=tcp#FileMBad
+vless://b62ffdfa-e1e5-ce44-a7a3-e8874ce1efa1@185.143.234.122:80?security=none&encryption=none&host=dl.avenflow.ir&headerType=none&type=tcp#FileMBad
 vless://ae8c0e19-221e-4624-9ad5-dcf0220ce85a@188.213.197.35:443?security=reality&encryption=none&pbk=8yHuzZK-w0BKPDvvbKC5-bmMb5mTYCP300N30XGulzM&headerType=none&fp=chrome&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=www.digikala.com&sid=768ef2dd2dd43b00#FileMBad
 vless://37888748-2254-4112-91fd-0586c27f4b40@185.239.0.199:8443?authority=&encryption=none&security=none&serviceName=&type=grpc#FileMBad
 vless://081efe27-f6b8-4f60-aedb-3c9effe9c67d@poe.com:443?path=%2F&security=tls&alpn=http%2F1.1&encryption=none&host=80bab3a2.gon-7ye.pages.dev&type=ws&sni=80bab3a2.gon-7ye.pages.dev#FileMBad
@@ -291,10 +298,3 @@ trojan://dbyDzDexiy3CrH7Q8qwYD8PKbVMsgZYiJQ9z364ydNYfEPW00b367MCKWJCBuQsCOI269Vz
 vless://351ab55e-22ea-4e7c-a4df-4bd0273225f9@onlazh2.khakimilad.online:443?security=reality&encryption=none&pbk=AAZAKzA6b6g4dvXrZwyEM5WdrKcwisfUyWoXbVDlmVA&headerType=none&fp=chrome&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=www.aparat.com&sid=d2537da1d2#FileMBad
 vless://affa41b7-95d2-407e-b38f-5a294744304f@185.143.234.5:443?path=%2F%3Fed%3D443&security=tls&encryption=none&insecure=0&host=alef.ir.oadeflantrogm.realirshop.com&fp=randomized&type=ws&allowInsecure=0&sni=alef.ir.oadeflantrogm.realirshop.com#FileMBad
 vless://8a817d6d-cc99-c298-935c-da6d927641fb@cloud.vpsino.com:48324?security=none&type=tcp&headerType=none&path=%2F#FileMBad
-vless://affa41b7-95d2-407e-b38f-5a294744304f@185.143.234.120:443?path=%2F%3Fed%3D443&security=tls&encryption=none&insecure=0&host=alef.ir.oadeflantrogm.realirshop.com&fp=randomized&type=ws&allowInsecure=0&sni=alef.ir.oadeflantrogm.realirshop.com#FileMBad
-vless://fa803a1e-2ec6-4dc4-a4bd-3718fd48a442@65.21.145.122:25709?type=tcp&encryption=none&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1&ech=AFP%2BDQBPAAAgACC9xSlkvyEgSiGP9PerOAyHpYaHe8mkOt25rQvwSOveEwAkAAEAAQABAAIAAQADAAIAAQACAAIAAgADAAMAAQADAAIAAwADAAAAAA%…#FileMBad
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTplYWZhZDk2ODI2Yzc5ZGRk@163.171.137.76:47394?type=tcp#FileMBad
-vless://d36008f5-b01c-4250-ab9a-cfa9ae56fe5b@api.netino.uno:8080?encryption=none&headerType=http&host=skyroom.online%2Cigap.net%2Cgharar.ir&path=%2F&security=none&type=tcp#FileMBad
-vless://2271c50f-ac7a-4d7f-8b04-64085b0daa56@172.64.152.170:2052?mode=auto&path=pabloping&security=&encryption=none&host=updn.pabloping.pro&type=xhttp#FileMBad
-vless://e5c63793-015d-42d4-9440-55b70293962a@79.175.177.239:443?security=&encryption=none&headerType=&type=tcp#FileMBad
-trojan://dbyDzDexiy3CrH7Q8qwYD8PKbVMsgZYiJQ9z364ydNYfEPW00b367MCKWJCBuQsCOI269VzfbN2qJN09oHSFxJMW7GM062fFMVMKeaSRGEbHi1QrysuBH1I0uz3+q8J74PM8FlRxiISrxO3LYHmPtQ==#FileMBad

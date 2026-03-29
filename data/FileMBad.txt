@@ -1,3 +1,13 @@
+vless://6779cce5-3b97-4cec-93fc-b8ebdd101569@omgspacir.clearpa66thdata.shop:37936?encryption=none&security=none&type=tcp#FileMBad
+vless://e2fe50da-b154-4133-b740-5723df4946b7@omgspacir.clearpa66thdata.shop:19105?encryption=none&security=none&type=tcp#FileMBad
+vless://261c172d-bb9e-49d0-b275-ede346afa58a@185.143.233.200:443?path=%2F%3Fed%3D443&security=tls&encryption=none&insecure=0&host=alef.ir.oadeflantrogm.airasiadl.com&fp=randomized&type=ws&allowInsecure=0&sni=alef.ir.oadeflantrogm.airasiadl.com#FileMBad
+vless://bbafc769-441b-4f06-9aae-9cc04ede1980@afrcloud22.mmv.kr:443?encryption=none&security=tls&sni=afrcloud22.mmv.kr&fp=chrome&type=ws&host=afrcloud22.mmv.kr&path=%2F198.98.61.220%3D443#FileMBad
+vless://b8a70721-47e6-4ad9-b705-49e8fed738ec@video.ir.temas-lomat.ir:55399?type=tcp&encryption=none&security=none#FileMBad
+vless://f5a4f498-69cf-4d26-9482-54fccd7ae885@space.zenvault.ir:48565?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://3811e832-817b-48b8-cd1f-b650439ce79b@sites.mtanaco.top:443?security=none&encryption=none&host=s1.mediaad.org&headerType=http&type=tcp#FileMBad
+vless://a718c589-8b7c-4986-a3bb-874b12db37bc@snapp.ir:80?type=ws&encryption=none&path=%2F&host=bote.wpemdad.com&security=none#FileMBad
+vless://ab1ddafb-9514-40ab-9e4b-a3878f70931d@144.31.1.59:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=_KTsOFhGnC0W28ZqO8_FApozMp7tJ9cVBTLKLAA_OR0&security=reality&sid=ae64c9b46bff174a&sni=pl.sky-vault.top&type=tcp#FileMBad
+vless://1d3774f9-76d2-45bb-8a8a-2ad79aee03d6@arvancloud.ir:443?encryption=none&security=tls&sni=ai.faloweram.ir&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome&type=ws&host=ai.faloweram.ir&path=%2F#FileMBad
 vless://345d1727-49fa-452f-84d0-fe428b84ea59@snapp.ir:80?type=ws&encryption=none&path=%2F&host=ms.arain-gogamecenter.ir&security=none#FileMBad
 vless://105fcd40-dea5-4eb4-866d-54129ae68e55@ir.notrinoo.click:44398?encryption=none&security=none&type=tcp&headerType=none#FileMBad
 vless://08ecb27f-b261-4a7f-b326-d51e0cb7b0e8@snapp.ir:80?security=none&allowInsecure=0&encryption=none&type=ws&host=star1.amirpy.ir&path=/snapp#FileMBad
@@ -288,13 +298,3 @@ ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206MlRWUEtuYUF5U0dKYnRWdGlOU2Q5YTl4V3VrT3lseEF
 vless://1fd0b112-83da-499c-8df1-d6d2ec941dab@shop.webchipro2.ir:7777?security=none&allowInsecure=0&encryption=none&type=tcp&headerType=none#FileMBad
 vless://d29cf368-c2d3-4d72-bbc0-cb4588039226@185.143.234.122:80?path=%2F&security=&encryption=none&host=dl.koremusic.ir&type=ws#FileMBad
 vless://01ee00d0-b81b-40db-9b74-cfcebb595903@shop.webchipro2.ir:7777?type=tcp&encryption=none&security=none#FileMBad
-vless://be099d4f-3d6e-45f0-91fa-bffca4cefb12@shop.webchipro2.ir:7777?type=tcp&encryption=none&security=none#FileMBad
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0TU9QTFBIRVhTWExIYUN6S0U1RGtGZ2RhbzQ2Ymo4ag%3D%3D@vip.tekcloud.site:20900#FileMBad
-vless://0d6b5af6-17df-4bb1-af76-e524f00602a5@172.232.248.242:2321?encryption=none&security=none&type=tcp#FileMBad
-vless://ea8d14d4-ca12-4cd1-bcad-f0fa72f6eadc@us.vpnhi.ru:443?allowInsecure=1&encryption=none&host=us.vpnhi.ru&path=%2Fvpnws&security=tls&sni=us.vpnhi.ru&type=ws#FileMBad
-vless://1027b850-de79-4a94-b337-eccdac28e141@144.24.126.26:443?allowInsecure=1&encryption=none&host=g.sandesh.qzz.io&path=%2Fvless&security=tls&sni=g.sandesh.qzz.io&type=ws#FileMBad
-trojan://strong-secret-pass-777@84.32.9.60:4443?allowInsecure=1#FileMBad
-vmess://4b80aa86
-vless://e033ef6e-ab4b-47d4-a523-ff568d2c8dbb@45.149.114.75:8443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=TH8C9sgNuMRVR3o5QehXPgYw8PWjoHrH2rVQF4JWwGI&security=reality&sni=tradingview.com&type=tcp#FileMBad
-vless://d40f5823-1ebd-11f1-8cae-c3845d39d2de@144.172.111.207:8443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=FVL0r87K3-vUP2KXQX1juLMFEHJtvxwKM-nm6_PYllc&security=reality&sid=cafe01234567&sni=www.apple.com&type=tcp#FileMBad
-vless://57ba2ab1-a283-42eb-82ee-dc3561a805b8@104.21.3.219:8443?allowInsecure=1&encryption=none&host=ovhwuxian.pai50288.uk&path=%2F57ba2ab1&security=tls&sni=ovhwuxian.pai50288.uk&type=ws#FileMBad

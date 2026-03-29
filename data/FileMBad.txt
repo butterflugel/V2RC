@@ -1,3 +1,7 @@
+vless://aba7b0b8-4efd-4987-8b7d-e890d1df1d4b@newgen.lightxpro.shop:2002?security=none&encryption=none&headerType=none&type=tcp#FileMBad
+vless://58a3c9e4-0163-4794-84c5-2593a351c67f@h.kickfa.ir:8080?path=%2F&security=none&encryption=none&host=h.kickfa.ir&type=ws#FileMBad
+vless://a1f346fa-c7e3-4506-9372-5e540ad58671@81.12.54.14:1010?encryption=none&type=tcp&headerType=none#FileMBad
+vless://5092fd38-ea06-4554-8e95-5ccab2a6a0e0@f1.springpaatogh8.store:2087?path=%2F%3Fed%3D2560%2FJOIN%2FAV2rayBOT%2FJOIN%2FAV2rayBOT%2FJOIN%2FAV2rayBOT%2FJOIN%2FAV2rayBOT%2FJOIN%2FAV2rayBOT&security=tls&encryption=none&insecure=0&host=matin12345678.netlinr.ir&type=ws&allowInsecure=0&sni=matin12345678.netlinr.ir#FileMBad
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#FileMBad
 vless://6779cce5-3b97-4cec-93fc-b8ebdd101569@omgspacir.clearpa66thdata.shop:37936?encryption=none&security=none&type=tcp#FileMBad
 vless://e2fe50da-b154-4133-b740-5723df4946b7@omgspacir.clearpa66thdata.shop:19105?encryption=none&security=none&type=tcp#FileMBad
@@ -294,7 +298,3 @@ vless://09f8936a-1ff2-4e00-838b-de62964d071d@s82.faststrong.sbs:51218?security=n
 vless://5d61ea3c-ad8f-488c-a7ce-1ac65fc15ba5@ir.gafe-lorbad.ir:443?security=none&allowInsecure=0&encryption=none&type=tcp&headerType=none#FileMBad
 vless://e8cc2083-f9c4-463b-bfb7-d1dd2e1e41a6@vip-meli6.nightgemshop.com:41765?security=none&encryption=none&headerType=none&type=tcp#FileMBad
 vless://84e65d85-cd6b-48c8-ad80-255b3dea4a9d@ir.sjdpictures.ir:19305?security=none&encryption=none&host=telewebion.ir&headerType=http&type=tcp#FileMBad
-vless://89b62e0b-7391-4722-98f0-2a9f71dd9565@5.42.217.158:29770?path=%2F&security=none&encryption=none&type=ws#FileMBad
-ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206MlRWUEtuYUF5U0dKYnRWdGlOU2Q5YTl4V3VrT3lseEFQekxSOG9MZFN3MD06bHBmSjJjUlIwSDR0TDloUGwrVXJXMjNSTWsweGxJcUFpK01TLzM3UzhuMD0=@gtbwbdxk.avashop.info:8443?type=tcp#FileMBad
-vless://1fd0b112-83da-499c-8df1-d6d2ec941dab@shop.webchipro2.ir:7777?security=none&allowInsecure=0&encryption=none&type=tcp&headerType=none#FileMBad
-vless://d29cf368-c2d3-4d72-bbc0-cb4588039226@185.143.234.122:80?path=%2F&security=&encryption=none&host=dl.koremusic.ir&type=ws#FileMBad

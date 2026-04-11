@@ -1,3 +1,5 @@
+vless://1f70e732-e72d-4535-b494-a595d4df4b0b@45.130.125.160:8443?security=tls&alpn=h3%2Ch2%2Chttp%2F1.1&encryption=none&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=master.red-cow.de#MTMVPN
+vless://c10999b4-7f93-5a50-3908-1467b1e52ae2@155.212.37.10:993?security=reality&encryption=none&pbk=0xVsi6JYS-gJFUILwuePsB32jvWtxRT_okJSmcWEQEc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=speed.cloudflare.com#MTMVPN
 vless://db27952d-9de6-4a90-d508-0d2ab314d2f4@18.192.42.228:18694?security=none&encryption=none&headerType=none&type=tcp#MTMVPN
 hysteria2://Telegram--%3E%40Ln2Ray@gavazn.lnmarketplace.net:45000?security=tls&obfs=salamander&obfs-password=Telegram--%3E%40Ln2Ray&insecure=1&sni=gavazn.55994421.xyz#MTMVPN
 vless://3b7ec44b-66d8-4822-b772-f1f50c3fec95@data.cloudvibe.ir:8443?path=%2FR8I9Yqu0DxpQB2NKCxLA&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&host=data-tm189.netsnap.ir&fp=chrome&type=ws&sni=data-tm189.netsnap.ir#MTMVPN
@@ -296,5 +298,3 @@ vless://309c4bd0-7430-b8aa-2238-1075e9e29370@18.192.3.23:20096?security=reality&
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg%3D%3D@3.1.195.148:8313#MTMVPN
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLg%3D%3D@3.1.195.148:8319#MTMVPN
 vless://af488953-ea77-7ac1-965d-19b3cd17c213@record.persianmizban.com:443?path=%2F&security=tls&encryption=none&host=lgoin.persianmizban.com&fp=chrome&type=ws&sni=lgoin.persianmizban.com#MTMVPN
-vless://24390f0c-41ca-2277-a9ab-379d4c0ec9fa@srv-p0.netmaster.cam:8080?security=none&encryption=none&type=ws&sni=1#MTMVPN
-vless://991519c1-3680-49b7-bb9f-9029a7a39067@c2.s-sub.org:8443?path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&insecure=0&host=backup.f-sub.cfd&fp=chrome&type=ws&allowInsecure=0&sni=backup.f-sub.cfd#MTMVPN

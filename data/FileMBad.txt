@@ -1,3 +1,8 @@
+vmess://eyJhZGQiOiIxODUuMTEuODkuMzgiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiYWVkZGJiYmQtYWQ5NS00OWU4LWVlMzEtN2NhY2M3ZWRlMTE3IiwiaW5zZWN1cmUiOiIwIiwibmV0IjoidGNwIiwicGF0aCI6IiIsInBvcnQiOiIxMjgwOSIsInBzIjoiRmlsZU1CYWQiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9
+vless://a7a9ba8d-fefe-4f91-804b-75ce163fa0a0@snapp.ir:80?security=none&allowInsecure=0&encryption=none&type=ws&host=ssssssma.linuwebtunnel.site&path=/#FileMBad
+vless://5d4ca2e0-f5a1-4cff-b241-3c1328485d38@blubank.sb24.ir:80?path=%2F&security=&encryption=none&host=ux.onyxshoes.ir&type=ws#FileMBad
+vless://ea1a6a75-5353-4fa4-a0ce-83b4721dc117@speedtest.kenargozar.com:4252?mode=gun&security=reality&encryption=none&authority=&pbk=mm6koZQa1qURw83Z29llVaU7wSz0vXkBBD55Xr4tESg&fp=chrome&spx=%2Flive&allowinsecure=0&type=grpc&serviceName=aparat-stream&sni=www.aparat.com&sid=7a#FileMBad
+vless://63318066-2aec-41d2-8f6c-eced13d04cd0@arvancloud.ir:80?path=%40TunizoNET&security=none&encryption=none&host=ri.amirenzohost.ir&type=ws#FileMBad
 vless://95f15cd7-3b53-4d89-982e-cd3802b33d32@snapp.ir:80?path=%2F&security=&encryption=none&host=pan.elitev2.ir&type=ws#FileMBad
 vless://0a01f9ec-ff41-455a-8890-922962cdc077@arvan1.un1ty.ir:80?path=/jesuschrist&security=none&encryption=none&type=ws#FileMBad
 vless://84661dd4-2fd4-435b-87b2-b5b1c518bddd@snapp.ir:80?path=%2F&security=none&encryption=none&host=sssss.linuwebtunnel.site&type=ws#FileMBad
@@ -293,8 +298,3 @@ vless://80682b08-2cc6-41da-9a03-1d8682455765@pg.nexorainnovationhub.ir:80?encryp
 vless://47d149e3-8ba6-07d0-b91f-3dd9771fa7cc@khamenei.ir:443?encryption=none&type=tcp&security=tls&headerType=none&sni=vaja.ir&alpn=h2%2Chttp%2F1.1&fp=chrome&allowInsecure=1#FileMBad
 vless://977e7d48-965c-42c1-aef9-1593199cb555@cdn.mativamamati.ir:80?type=ws&encryption=none&path=%2Fservices%2F879912312%2Fcreate&host=cdn.mativamamati.ir&security=none#FileMBad
 ss://do#FileMBad
-trojan://telegram-id-privatevpns@15.237.12.135:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#FileMBad
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5NGFhZTA1MTAxODhlOGM1@141.95.106.127:11201#FileMBad
-vless://fe487cc9-048e-4f6e-a9e3-32bd4c0b83e4@As.dlsp-ir.com:8443?encryption=none&type=tcp&security=tls&headerType=http&sni=As.dlsp-ir.com&alpn=h2%2Ch3&fp=randomized&allowInsecure=0#FileMBad
-vless://d63cd301-2161-49e7-93cd-88e1f24296eb@trex.nahidapp.com:443?path=%2Fvless-ws&security=tls&encryption=none&insecure=0&host=trex.nahidapp.com&fp=chrome&type=ws&allowInsecure=0&sni=trex.nahidapp.com#FileMBad
-vless://0dc7da28-69ca-467d-9d7b-f5d83e834403@khan10.tarfandgallery.sbs:443?path=%2F&security=tls&alpn=h2%2Chttp%2F1.1&encryption=none&insecure=0&fp=chrome&type=ws&allowInsecure=0&sni=khan10.tarfandgallery.sbs#FileMBad

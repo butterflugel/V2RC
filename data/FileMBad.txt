@@ -1,3 +1,5 @@
+trojan://humanity@127.0.0.1:40443?path=%2Fassignment&security=tls&insecure=0&host=www.ignitelimit.com&type=ws&allowInsecure=0&sni=www.ignitelimit.com#FileMBad
+vmess://eyJhZGQiOiIxODUuMjM2LjM4LjQ0IiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6ImM5ZTQyNTM3LTg2NTItNGE0Yy04NWQzLTBkMzZhYmYzOGY4OCIsImluc2VjdXJlIjoiMCIsIm5ldCI6InRjcCIsInBhdGgiOiIiLCJwb3J0IjoiMTk5NDYiLCJwcyI6IkZpbGVNQmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ
 vless://98583371-c979-4c88-b81f-fe173b22b5a0@93.126.22.63:24434?encryption=none&security=none&type=tcp#FileMBad
 vless://4bc71fba-0b29-4cfa-98c2-436efe65407d@snapp.ir:80?path=%2Fgraphql%3Fed%3D2560&security=none&encryption=none&host=ss12.limitless-cloud.ir&type=ws#FileMBad
 vless://215a7d31-9071-4710-8612-1718afdc0f4d@snapp.ir:80?type=ws&encryption=none&path=%2Fhajiiiips&host=arad.starweb.sbs&security=none#FileMBad
@@ -296,5 +298,3 @@ vless://bdadec66-0808-441e-a142-31302b4ef1a4@snapp.ir:80?type=ws&security=none&p
 vless://97fdc613-af07-40ef-bfde-7052d1c90c61@fr.it-net.top:80?path=%2F&security=none&encryption=none&host=fr.it-net.top&type=ws#FileMBad
 vless://4804400b-b591-4545-adff-c36f5800052b@snapp.ir:80?path=%2Fgraphql%3Fed%3D2560&security=&encryption=none&host=ss6.limitless-cloud.ir&type=ws#FileMBad
 vless://405899f1-59fd-4bd4-b11e-0f5aeb9e470e@snapp.ir:80?path=%2F&security=none&encryption=none&host=derakhshan.molvliafor.ir&type=ws#FileMBad
-vless://263b4c02-c34e-4e84-a6cb-6b07b275194e@out.newlinemobile.xyz:443?security=reality&encryption=none&type=tcp&sni=www.aparat.com&sid=b5c0ec&fp=chrome&pbk=klzunRrpCD-1ELitLDb07YGfB2aFsmC8Bqm8alo_sWc&spx=/qT4nwMj7o0h33eN&headerType=none#FileMBad
-vless://519aa21b-20c8-42fd-965c-d22a4e1c9407@snapp.ir:80?path=%2Fgraphql%3Fed%3D2560&security=&encryption=none&host=ss5.limitless-cloud.ir&type=ws#FileMBad

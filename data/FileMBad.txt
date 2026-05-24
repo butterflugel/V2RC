@@ -1,3 +1,13 @@
+vless://e087d9cc-b13b-455e-87a2-e9480bbb412a@xllbot-human.ir:2053?type=ws&encryption=none&insecure=0&allowInsecure=0&path=%2Fapi&host=xllbot-human.ir&security=tls&fp=chrome&alpn=h2&sni=xllbot-human.ir#FileMBad
+vless://8dfecd05-1c37-40ea-a6c0-a56220bfe0fd@snapp.ir:80?encryption=none&security=none&type=ws&headerType=none&path=%2Fgraphql%3Fed%3D2560&host=ss5.limitless-cloud.ir#FileMBad
+vless://7f54873f-f0be-4b69-8e13-0ea67e817281@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad
+vless://4dccf2d1-68ea-4399-99d6-de05011d5eeb@digipay.ir:80?type=ws&encryption=none&path=%2F&host=rb.irantradeing.ir&security=none#FileMBad
+vless://8ffdb45e-a369-43ef-9216-1ec81155196e@snapp.ir:80?encryption=none&security=none&type=ws&headerType=none&path=%2Fgraphql%3Fed%3D2560&host=ss13.limitless-cloud.ir#FileMBad
+vless://07d93c71-81ef-44a8-bba2-a2fcf91934c5@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad
+vless://24c5d374-d29e-478d-a2ec-b19719508c09@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad
+vless://c27f4d4c-c55c-4519-9af8-f59476783f43@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad
+vless://4e050c1e-bb17-5cc9-b76f-f89bcb8dc5c1@185.126.6.183:443?encryption=none&security=reality&sni=www.digikala.com&fp=chrome&pbk=jcpXKgeHTyfSv9QhYUxx0fZQkaEkTuh_VY2q6-Nc6mA&sid=a8d25d51aadd639e&type=tcp&flow=xtls-rprx-vision#FileMBad
+vmess://eyJ2IjoiMiIsInBzIjoiRmlsZU1CYWQiLCJhZGQiOiJiNTFkNjRjYi1jNWQ2LTQ3OTEtOGVjZi0wYTZkOGQ3MWM3MTcud3RmIiwicG9ydCI6IjIyOTAxIiwiaWQiOiIzZGQ0NTJmYi0xNDM4LTRlMTEtYjEzOC0xYTAyOTVlOTYxODEiLCJhaWQiOiIwIiwic2N5IjoiYXV0byIsIm5ldCI6InRjcCIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIiLCJ0bHMiOiIiLCJzbmkiOiIiLCJhbHBuIjoiIiwiZnAiOiIifQ
 vless://a08d1c4b-76c9-499f-910a-2366b5594bc0@185.143.233.5:443?encryption=none&security=tls&type=ws&headerType=none&path=%2Fchat%3Fed%3D127&host=g1.podro.store&sni=g1.podro.store&fp=firefox&alpn=h2%2Chttp%2F1.1#FileMBad
 vless://85e2fa85-09b9-4a63-b15c-57c37b42cd74@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad
 vless://2d8eadaa-7030-48fc-9eec-b6edbef32133@sub.pardisvps.ir:2086?type=ws&security=none&path=%2F&host=#FileMBad
@@ -288,13 +298,3 @@ vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@arvancloud.ir:2082?encryption=none&
 vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@arvancloud.ir:2095?encryption=none&security=none&type=ws&headerType=none&path=%2FTR%3Fed%3D2560&host=console.nonserver.ir#FileMBad
 ss://YWVzLTEyOC1nY206Sks1WDlseHdkMHNSSG1kYkU5M2gxYTZrbDlTWEp5Nlo=@127.0.0.1:1#FileMBad
 vless://7208f7a9-95d9-40c4-ab55-211681c14332@SnaPp.ir:2082?path=%2F&security=none&encryption=none&host=Mamad.mobilesubasa.com&type=ws#FileMBad
-vless://6f762813-1862-4708-ad26-a8e1808e8cb4@snappfood.ir:2052?path=%2Fws&security=none&encryption=none&host=cdnisfucka.drnimaamini.ir&type=ws#FileMBad
-vless://38bda3d7-90b5-4310-a21b-b2141313790b@185.143.233.5:2082?path=%2F&security=none&encryption=none&host=p1.sesrsa.com&type=ws#FileMBad
-vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@arvancloud.ir:2052?encryption=none&security=none&type=ws&headerType=none&path=%2FNL%3Fed%3D2560&host=console.nonserver.ir#FileMBad
-vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@arvancloud.ir:2086?encryption=none&security=none&type=ws&headerType=none&path=%2FUS%3Fed%3D2560&host=console.nonserver.ir#FileMBad
-vless://aa3e8bb7-d554-4a8d-bbb4-2b0948d3c8c6@dns.sane-new-eb.net:8080?encryption=none&security=none&type=grpc&headerType=none&mode=gun#FileMBad
-vless://d52ef383-0894-4840-b072-dcfbaea45dd2@snapp.ir:80?encryption=none&security=none&type=ws&headerType=none&path=%2Fgraphql%3Fed%3D2560&host=ss6.limitless-cloud.ir#FileMBad
-vless://d263d13f-c3e3-47f0-843e-8bd08e214929@red.docos.tech:443?security=tls&type=ws&headerType=&path=%2Fred%2F&host=red.docos.tech&sni=red.docos.tech&fp=chrome#FileMBad
-vless://2df6670e-3d31-48b6-a6ff-0e04a6e85eb2@snapp.ir:8080?type=ws&encryption=none&path=%2FPoweredByNexNull&host=retro.nexnull.pro&security=none#FileMBad
-vless://06ef598c-1555-4887-b3f9-08214a2f6792@104.17.72.206:443?path=%2F222.167.202.31%3A744...&security=tls&encryption=none&echfq=none&host=2026.hhhhh.eu.org&allowinsecure=1&type=ws&sni=2026.hhhhh.eu.org#FileMBad
-vless://b528432c-feeb-4d8e-b45f-05b424dd36ec@snapp.ir:80?type=ws&security=none&path=%2F&host=derakhshan.molvliafor.ir#FileMBad

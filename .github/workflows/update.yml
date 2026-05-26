@@ -2,26 +2,34 @@ name: Update
 
 on:
   schedule:
-    - cron: "0 */2 * * *"   # Every 2 hours
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: update-workflow
+  cancel-in-progress: false
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
@@ -29,12 +37,30 @@ jobs:
       - name: Run scraper
         run: python scrape.py
 
-      - name: Commit & Push
+      - name: Commit and push changes
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git pull --rebase || true
-          git add data/*.txt || true
-          git commit -m "chore: auto-update configs" || echo "No changes"
-          git push
+          shopt -s nullglob
+          files=(data/*.txt)
+
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No matching files"
+            exit 0
+          fi
+
+          git add "${files[@]}"
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git commit -m "chore: auto-update configs"
+
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

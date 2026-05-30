@@ -92,14 +92,10 @@ def parse_vmess(link: str) -> dict | None:
         decoded = base64.urlsafe_b64decode(
             fix_b64(payload)
         ).decode("utf-8")
-
         parsed = json.loads(decoded)
-
         if not isinstance(parsed, dict):
             return None
-
         return parsed
-
     except Exception:
         return None
 
@@ -107,27 +103,22 @@ def parse_vmess(link: str) -> dict | None:
 def parse_ss(link: str) -> dict | None:
     try:
         parsed = urllib.parse.urlsplit(link)
-
         userinfo = parsed.username or ""
         password = parsed.password
-
         if password is None:
             try:
                 decoded = base64.urlsafe_b64decode(
                     fix_b64(userinfo)
                 ).decode("utf-8")
-
                 if ":" in decoded:
                     method, pw = decoded.split(":", 1)
                 else:
                     return None
-
             except Exception:
                 return None
         else:
             method = userinfo
             pw = password
-
         return {
             "method": method.lower(),
             "password": pw,
@@ -136,7 +127,6 @@ def parse_ss(link: str) -> dict | None:
             "path": parsed.path,
             "query": canonical_query(parsed.query),
         }
-
     except Exception:
         return None
 
@@ -146,27 +136,20 @@ def canonical_query(query: str) -> str:
         query,
         keep_blank_values=True,
     )
-
     parsed.sort(key=lambda item: (item[0], item[1]))
-
     return urllib.parse.urlencode(parsed, doseq=True)
 
 
-def get_config_unique_key(link: str) -> str:
+def get_config_identity(link: str) -> dict | None:
     try:
         link = clean_link(link)
-
         parsed = urllib.parse.urlsplit(link)
-
         scheme = parsed.scheme.lower()
-
         if scheme == "vmess":
             config = parse_vmess(link)
-
             if not config:
-                return sha256(link)
-
-            identity = {
+                return None
+            return {
                 "scheme": "vmess",
                 "add": config.get("add"),
                 "port": str(config.get("port")),
@@ -181,25 +164,13 @@ def get_config_unique_key(link: str) -> str:
                 "alpn": config.get("alpn"),
                 "fp": config.get("fp"),
             }
-
-            return sha256(stable_json(identity))
-
         if scheme == "ss":
             config = parse_ss(link)
-
             if not config:
-                return sha256(link)
-
-            return sha256(stable_json(config))
-
-        if scheme in {
-            "vless",
-            "trojan",
-            "hysteria",
-            "hysteria2",
-            "socks",
-        }:
-            identity = {
+                return None
+            return config
+        if scheme in {"vless", "trojan", "hysteria", "hysteria2", "socks"}:
+            return {
                 "scheme": scheme,
                 "hostname": parsed.hostname,
                 "port": parsed.port,
@@ -207,29 +178,27 @@ def get_config_unique_key(link: str) -> str:
                 "path": parsed.path,
                 "query": canonical_query(parsed.query),
             }
-
-            return sha256(stable_json(identity))
-
-        return sha256(link)
-
+        return None
     except Exception:
+        return None
+
+
+def get_config_unique_key(link: str) -> str:
+    identity = get_config_identity(link)
+    if identity is None:
         return sha256(link)
+    return sha256(stable_json(identity))
 
 
 def normalize_config(raw_link: str, channel_name: str) -> str:
     try:
         raw_link = clean_link(raw_link)
-
         scheme = raw_link.split("://", 1)[0].lower()
-
         if scheme == "vmess":
             config = parse_vmess(raw_link)
-
             if not config:
                 return raw_link
-
             config["ps"] = channel_name
-
             encoded = (
                 base64.urlsafe_b64encode(
                     stable_json(config).encode("utf-8")
@@ -237,11 +206,8 @@ def normalize_config(raw_link: str, channel_name: str) -> str:
                 .decode("utf-8")
                 .rstrip("=")
             )
-
             return f"vmess://{encoded}"
-
         parsed = urllib.parse.urlsplit(raw_link)
-
         normalized = urllib.parse.urlunsplit(
             (
                 parsed.scheme,
@@ -251,62 +217,25 @@ def normalize_config(raw_link: str, channel_name: str) -> str:
                 channel_name,
             )
         )
-
         return normalized
-
     except Exception:
         return raw_link
 
 
-def extract_configs(text: str) -> list[str]:
+def extract_configs_from_text(text: str) -> list[str]:
     results = []
-
     for item in CONFIG_REGEX.findall(text):
         item = clean_link(item)
-
         if "://" not in item:
             continue
-
         results.append(item)
-
     return results
 
 
 def atomic_write(path: Path, content: str) -> None:
     tmp = path.with_suffix(".tmp")
-
     tmp.write_text(content, encoding="utf-8")
-
     tmp.replace(path)
-
-
-def load_existing_configs(
-    path: Path,
-) -> tuple[list[str], set[str]]:
-    if not path.exists():
-        return [], set()
-
-    lines = [
-        line.strip()
-        for line in path.read_text(
-            encoding="utf-8"
-        ).splitlines()
-        if line.strip()
-    ]
-
-    unique = []
-    seen = set()
-
-    for line in lines:
-        key = get_config_unique_key(line)
-
-        if key in seen:
-            continue
-
-        seen.add(key)
-        unique.append(line)
-
-    return unique, seen
 
 
 def fetch_page(url: str) -> str | None:
@@ -316,159 +245,130 @@ def fetch_page(url: str) -> str | None:
             headers=random_headers(),
             timeout=REQUEST_TIMEOUT,
         )
-
         response.raise_for_status()
-
         if not response.text.strip():
             return None
-
         return response.text
-
     except requests.RequestException:
         return None
 
 
-def extract_configs_from_html(html: str, name: str, seen_keys: set) -> list[str]:
-    found = []
+def extract_message_id(post_attr: str) -> int | None:
+    try:
+        parts = post_attr.rsplit("/", 1)
+        if len(parts) == 2:
+            return int(parts[1])
+        return None
+    except (ValueError, IndexError):
+        return None
 
-    raw_hits = extract_configs(html)
 
-    soup = BeautifulSoup(html, "lxml")
+def scrape_all_channels(channels: dict[str, str]) -> None:
+    global_seen = set()
+    all_channel_data = {}
 
-    text_hits = []
+    for name, base_url in channels.items():
+        if not isinstance(name, str) or not isinstance(base_url, str):
+            continue
+        base_url = base_url.strip()
+        if not base_url.startswith("https://t.me/s/"):
+            continue
 
-    for node in soup.select(
-        ".tgme_widget_message_text, .js-message_text"
-    ):
-        text_hits.extend(
-            extract_configs(
-                node.get_text(separator=" ", strip=True)
+        print(f"\nScraping {name}")
+        channel_configs = []
+        channel_seen = set()
+        next_url = base_url.rstrip("/")
+        previous_oldest_id = None
+
+        for page in range(MAX_PAGES_PER_CHANNEL):
+            print(f"  Page {page + 1}")
+            time.sleep(random.uniform(1.5, 3.0))
+            html = fetch_page(next_url)
+            if not html:
+                break
+
+            soup = BeautifulSoup(html, "lxml")
+
+            messages = soup.select("[data-post]")
+            if not messages:
+                break
+
+            text_nodes = soup.select(
+                ".tgme_widget_message_text, .js-message_text"
             )
-        )
+            all_text = "\n".join(
+                node.get_text(separator="\n", strip=True)
+                for node in text_nodes
+            )
 
-    all_raw = raw_hits + text_hits
+            raw_configs = extract_configs_from_text(all_text)
+            for raw in raw_configs:
+                identity = get_config_identity(raw)
+                if identity is None:
+                    continue
+                unique_key = sha256(stable_json(identity))
 
-    for raw in all_raw:
-        normalized = normalize_config(raw, name)
-        key = get_config_unique_key(normalized)
+                if unique_key in global_seen:
+                    continue
+                if unique_key in channel_seen:
+                    continue
 
-        if key in seen_keys:
-            continue
+                global_seen.add(unique_key)
+                channel_seen.add(unique_key)
 
-        seen_keys.add(key)
-        found.append(normalized)
+                normalized = normalize_config(raw, name)
+                channel_configs.append(normalized)
 
-    return found
+                if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
+                    break
 
+            if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
+                break
 
-def scrape_channel(base_url: str, name: str) -> None:
-    print(f"\nScraping {name}")
+            oldest_id = None
+            for message in messages:
+                post = message.get("data-post")
+                if not post:
+                    continue
+                msg_id = extract_message_id(post)
+                if msg_id is None:
+                    continue
+                if oldest_id is None or msg_id < oldest_id:
+                    oldest_id = msg_id
 
-    outfile = DATA_DIR / f"{name}.txt"
+            if oldest_id is None:
+                break
 
-    existing_configs, existing_keys = load_existing_configs(outfile)
+            if previous_oldest_id is not None and oldest_id >= previous_oldest_id:
+                break
 
-    new_configs = []
-    seen_keys = set(existing_keys)
+            previous_oldest_id = oldest_id
+            next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
 
-    next_url = base_url.rstrip("/")
+        all_channel_data[name] = channel_configs
+        print(f"  Found {len(channel_configs)} unique configs")
 
-    for page in range(MAX_PAGES_PER_CHANNEL):
-        print(f"  Page {page + 1}")
-
-        time.sleep(random.uniform(1.5, 3.0))
-
-        html = fetch_page(next_url)
-
-        if not html:
-            break
-
-        soup = BeautifulSoup(html, "lxml")
-
-        messages = soup.select("[data-post]")
-
-        if not messages:
-            break
-
-        page_configs = extract_configs_from_html(html, name, seen_keys)
-        new_configs.extend(page_configs)
-
-        oldest_id = None
-
-        for message in messages:
-            post = message.get("data-post")
-
-            if not post:
-                continue
-
-            try:
-                message_id = int(post.rsplit("/", 1)[1])
-
-                if oldest_id is None or message_id < oldest_id:
-                    oldest_id = message_id
-
-            except Exception:
-                continue
-
-        if oldest_id is None:
-            break
-
-        next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
-
-    combined = []
-    combined_seen = set()
-
-    for config in new_configs + existing_configs:
-        key = get_config_unique_key(config)
-
-        if key in combined_seen:
-            continue
-
-        combined_seen.add(key)
-        combined.append(config)
-
-        if len(combined) >= MAX_CONFIGS_PER_CHANNEL:
-            break
-
-    atomic_write(
-        outfile,
-        "\n".join(combined) + "\n",
-    )
-
-    print(f"Saved {len(combined)} configs -> {outfile}")
+    for name, configs in all_channel_data.items():
+        outfile = DATA_DIR / f"{name}.txt"
+        atomic_write(outfile, "\n".join(configs) + "\n")
+        print(f"Saved {len(configs)} configs -> {outfile}")
 
 
 def main() -> None:
     if not CHANNELS_FILE.exists():
         print("channels.json not found")
         return
-
     try:
         channels = json.loads(
             CHANNELS_FILE.read_text(encoding="utf-8")
         )
-
     except json.JSONDecodeError:
         print("Invalid channels.json")
         return
-
     if not isinstance(channels, dict):
         print("channels.json must contain an object")
         return
-
-    for name, url in channels.items():
-        if not isinstance(name, str):
-            continue
-
-        if not isinstance(url, str):
-            continue
-
-        url = url.strip()
-
-        if not url.startswith("https://t.me/s/"):
-            continue
-
-        scrape_channel(url, name)
+    scrape_all_channels(channels)
 
 
 if __name__ == "__main__":

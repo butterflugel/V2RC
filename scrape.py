@@ -1,10 +1,8 @@
 import base64
 import hashlib
 import json
-import os
 import random
 import re
-import socket
 import time
 import urllib.parse
 from pathlib import Path
@@ -28,25 +26,21 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 CHANNELS_FILE = Path("channels.json")
 
 MAX_CONFIGS_PER_CHANNEL = 300
-MAX_PAGES_PER_CHANNEL = 15
 REQUEST_TIMEOUT = 30
 
-TELEGRAM_IPS = [
-    "149.154.167.99",
-    "149.154.175.59",
-    "149.154.175.100",
-    "149.154.167.91",
-]
-
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
 ]
 
 TRAILING_CHARS = ".,);]'\"}>"
+
+TELEGRAM_DOMAINS = [
+    "https://t.me",
+    "https://telegram.me",
+    "https://telegram.org",
+]
 
 
 def sha256(value: str) -> str:
@@ -216,207 +210,120 @@ def atomic_write(path: Path, content: str) -> None:
     tmp.replace(path)
 
 
-def resolve_telegram_ip() -> str | None:
-    try:
-        ip = socket.gethostbyname("t.me")
-        print(f"  Resolved t.me to {ip}")
-        return ip
-    except socket.gaierror:
-        pass
+def fetch_channel_messages(channel_username: str) -> str | None:
+    session = requests.Session()
     
-    for dns_server in ["8.8.8.8", "1.1.1.1", "9.9.9.9"]:
-        try:
-            import dns.resolver
-            resolver = dns.resolver.Resolver()
-            resolver.nameservers = [dns_server]
-            answers = resolver.resolve("t.me", "A")
-            ip = str(answers[0])
-            print(f"  Resolved t.me to {ip} via {dns_server}")
-            return ip
-        except Exception:
-            continue
-    
-    ip = random.choice(TELEGRAM_IPS)
-    print(f"  Using fallback IP: {ip}")
-    return ip
-
-
-def fetch_page(url: str, ip: str) -> str | None:
-    parsed = urllib.parse.urlparse(url)
-    headers = {
-        "User-Agent": random.choice(USER_AGENTS),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Host": parsed.netloc,
-        "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1",
-        "Cache-Control": "max-age=0",
-    }
-    
-    direct_url = f"https://{ip}{parsed.path}"
-    if parsed.query:
-        direct_url += f"?{parsed.query}"
-    
-    for attempt in range(3):
-        try:
-            time.sleep(random.uniform(1, 2))
-            
-            response = requests.get(
-                direct_url,
-                headers=headers,
-                timeout=REQUEST_TIMEOUT,
-                verify=True,
-            )
-            
-            if response.status_code == 403:
-                print(f"  WARNING: Access forbidden (403)")
-                return None
-            if response.status_code == 429:
-                print(f"  WARNING: Rate limited (429)")
-                time.sleep(60)
+    for domain in TELEGRAM_DOMAINS:
+        url = f"{domain}/s/{channel_username}"
+        
+        headers = {
+            "User-Agent": random.choice(USER_AGENTS),
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "DNT": "1",
+            "Connection": "keep-alive",
+            "Upgrade-Insecure-Requests": "1",
+        }
+        
+        for attempt in range(2):
+            try:
+                time.sleep(random.uniform(1, 2))
+                
+                response = session.get(
+                    url,
+                    headers=headers,
+                    timeout=REQUEST_TIMEOUT,
+                    allow_redirects=True,
+                )
+                
+                if response.status_code == 200:
+                    if "tgme_widget_message" in response.text:
+                        print(f"  Success with {domain}")
+                        return response.text
+                
+            except requests.Timeout:
                 continue
-            
-            response.raise_for_status()
-            
-            if not response.text.strip():
-                print(f"  WARNING: Empty response")
-                return None
-            
-            if "tgme_widget_message" not in response.text and "data-post" not in response.text:
-                print(f"  WARNING: Response doesn't contain message data")
-                debug_file = Path("debug_response.html")
-                debug_file.write_text(response.text[:5000], encoding="utf-8")
-                print(f"  DEBUG: Saved response sample to {debug_file}")
-                return None
-            
-            return response.text
-            
-        except requests.Timeout:
-            print(f"  ERROR: Request timed out")
-            return None
-        except requests.RequestException as e:
-            print(f"  ERROR: Request failed: {str(e)[:200]}")
-            if attempt < 2:
-                time.sleep(2 ** attempt)
-        except Exception as e:
-            print(f"  ERROR: Unexpected error: {str(e)[:200]}")
-            return None
+            except requests.RequestException:
+                continue
+            except Exception:
+                continue
     
     return None
 
 
-def extract_message_id(post_attr: str) -> int | None:
-    try:
-        parts = post_attr.rsplit("/", 1)
-        if len(parts) == 2:
-            return int(parts[1])
-        return None
-    except (ValueError, IndexError):
-        return None
+def scrape_channel(channel_username: str, channel_name: str) -> list:
+    configs = []
+    seen = set()
+    
+    html = fetch_channel_messages(channel_username)
+    if not html:
+        print(f"  ERROR: Could not fetch channel")
+        return configs
+    
+    soup = BeautifulSoup(html, "lxml")
+    
+    text_nodes = soup.select(".tgme_widget_message_text, .js-message_text")
+    all_text = "\n".join(
+        node.get_text(separator="\n", strip=True)
+        for node in text_nodes
+    )
+    
+    raw_configs = extract_configs_from_text(all_text)
+    
+    for raw in raw_configs:
+        identity = get_config_identity(raw)
+        if identity is None:
+            continue
+        
+        unique_key = sha256(stable_json(identity))
+        if unique_key in seen:
+            continue
+        
+        seen.add(unique_key)
+        normalized = normalize_config(raw, channel_name)
+        configs.append(normalized)
+        
+        if len(configs) >= MAX_CONFIGS_PER_CHANNEL:
+            break
+    
+    return configs
 
 
 def scrape_all_channels(channels: dict[str, str]) -> None:
-    print("Resolving Telegram IP...")
-    ip = resolve_telegram_ip()
-    if not ip:
-        print("ERROR: Cannot resolve Telegram IP")
-        return
-    
-    global_seen = set()
     all_channel_data = {}
     
-    for name, base_url in channels.items():
-        if not isinstance(name, str) or not isinstance(base_url, str):
-            continue
-        base_url = base_url.strip()
-        if not base_url.startswith("https://t.me/s/"):
+    for name, url in channels.items():
+        if not isinstance(name, str) or not isinstance(url, str):
             continue
         
-        print(f"\nScraping {name}")
-        channel_configs = []
-        channel_seen = set()
-        next_url = base_url.rstrip("/")
-        previous_oldest_id = None
+        url = url.strip()
+        channel_username = url.replace("https://t.me/s/", "").replace("https://t.me/", "").replace("https://telegram.me/s/", "").replace("https://telegram.me/", "").strip("/")
         
-        for page in range(MAX_PAGES_PER_CHANNEL):
-            print(f"  Page {page + 1}")
-            time.sleep(random.uniform(2.0, 4.0))
-            html = fetch_page(next_url, ip)
-            if not html:
-                break
-            
-            soup = BeautifulSoup(html, "lxml")
-            
-            messages = soup.select("[data-post]")
-            if not messages:
-                print(f"  WARNING: No messages found on page")
-                break
-            
-            text_nodes = soup.select(
-                ".tgme_widget_message_text, .js-message_text"
-            )
-            all_text = "\n".join(
-                node.get_text(separator="\n", strip=True)
-                for node in text_nodes
-            )
-            
-            raw_configs = extract_configs_from_text(all_text)
-            for raw in raw_configs:
-                identity = get_config_identity(raw)
-                if identity is None:
-                    continue
-                unique_key = sha256(stable_json(identity))
-                
-                if unique_key in global_seen:
-                    continue
-                if unique_key in channel_seen:
-                    continue
-                
-                global_seen.add(unique_key)
-                channel_seen.add(unique_key)
-                
-                normalized = normalize_config(raw, name)
-                channel_configs.append(normalized)
-                
-                if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
-                    break
-            
-            if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
-                break
-            
-            oldest_id = None
-            for message in messages:
-                post = message.get("data-post")
-                if not post:
-                    continue
-                msg_id = extract_message_id(post)
-                if msg_id is None:
-                    continue
-                if oldest_id is None or msg_id < oldest_id:
-                    oldest_id = msg_id
-            
-            if oldest_id is None:
-                break
-            
-            if previous_oldest_id is not None and oldest_id >= previous_oldest_id:
-                break
-            
-            previous_oldest_id = oldest_id
-            next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
+        if not channel_username:
+            continue
+        
+        print(f"\nScraping {name} (@{channel_username})")
+        
+        channel_configs = scrape_channel(channel_username, name)
         
         all_channel_data[name] = channel_configs
         print(f"  Found {len(channel_configs)} unique configs")
     
     for name, configs in all_channel_data.items():
         outfile = DATA_DIR / f"{name}.txt"
-        atomic_write(outfile, "\n".join(configs) + "\n")
-        print(f"Saved {len(configs)} configs -> {outfile}")
+        if configs:
+            atomic_write(outfile, "\n".join(configs) + "\n")
+            print(f"Saved {len(configs)} configs -> {outfile}")
+        else:
+            print(f"No configs found for {name}")
 
 
 def main() -> None:
     if not CHANNELS_FILE.exists():
         print("channels.json not found")
         return
+    
     try:
         channels = json.loads(
             CHANNELS_FILE.read_text(encoding="utf-8")
@@ -424,6 +331,7 @@ def main() -> None:
     except json.JSONDecodeError:
         print("Invalid channels.json")
         return
+    
     if not isinstance(channels, dict):
         print("channels.json must contain an object")
         return

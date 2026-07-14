@@ -35,18 +35,10 @@ jobs:
           pip install \
             requests \
             beautifulsoup4 \
-            lxml
-
-      - name: Fix DNS resolution
-        run: |
-          echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
-          echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
+            lxml \
+            dnspython
 
       - name: Run scraper
-        env:
-          PROXY_URL: ${{ secrets.PROXY_URL }}
-          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
-          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
         run: python scrape.py
 
       - name: Commit and push changes

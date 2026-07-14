@@ -1,6 +1,7 @@
 import base64
 import hashlib
 import json
+import os
 import random
 import re
 import time
@@ -29,32 +30,55 @@ CHANNELS_FILE = Path("channels.json")
 
 MAX_CONFIGS_PER_CHANNEL = 300
 MAX_PAGES_PER_CHANNEL = 15
-REQUEST_TIMEOUT = 15
+REQUEST_TIMEOUT = 30
+
+PROXY_URL = os.environ.get("PROXY_URL", None)
+PROXY_USERNAME = os.environ.get("PROXY_USERNAME", None)
+PROXY_PASSWORD = os.environ.get("PROXY_PASSWORD", None)
 
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-    "Mozilla/5.0 (X11; Linux x86_64)",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
 ]
 
 TRAILING_CHARS = ".,);]'\"}>"
 
-session = requests.Session()
+def get_session():
+    session = requests.Session()
+    
+    if PROXY_URL:
+        proxies = {
+            "http": PROXY_URL,
+            "https": PROXY_URL,
+        }
+        if PROXY_USERNAME and PROXY_PASSWORD:
+            proxy_parts = urllib.parse.urlparse(PROXY_URL)
+            proxy_url = f"{proxy_parts.scheme}://{PROXY_USERNAME}:{PROXY_PASSWORD}@{proxy_parts.netloc}"
+            proxies = {
+                "http": proxy_url,
+                "https": proxy_url,
+            }
+        session.proxies.update(proxies)
+    
+    retry = Retry(
+        total=5,
+        connect=5,
+        read=5,
+        backoff_factor=2,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset({"GET"}),
+    )
+    
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    
+    return session
 
-retry = Retry(
-    total=3,
-    connect=3,
-    read=3,
-    backoff_factor=1,
-    status_forcelist=(429, 500, 502, 503, 504),
-    allowed_methods=frozenset({"GET"}),
-)
-
-adapter = HTTPAdapter(max_retries=retry)
-
-session.mount("http://", adapter)
-session.mount("https://", adapter)
-
+session = get_session()
 
 def fix_b64(value: str) -> str:
     value = value.strip()
@@ -64,8 +88,16 @@ def fix_b64(value: str) -> str:
 def random_headers() -> dict:
     return {
         "User-Agent": random.choice(USER_AGENTS),
-        "Accept": "*/*",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
         "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Cache-Control": "max-age=0",
     }
 
 
@@ -240,16 +272,45 @@ def atomic_write(path: Path, content: str) -> None:
 
 def fetch_page(url: str) -> str | None:
     try:
+        time.sleep(random.uniform(1, 2))
+        
         response = session.get(
             url,
             headers=random_headers(),
             timeout=REQUEST_TIMEOUT,
         )
-        response.raise_for_status()
-        if not response.text.strip():
+        
+        if response.status_code == 403:
+            print(f"  WARNING: Access forbidden (403) - likely IP blocked by Telegram")
             return None
+        if response.status_code == 429:
+            print(f"  WARNING: Rate limited (429) - waiting longer")
+            time.sleep(60)
+            return None
+            
+        response.raise_for_status()
+        
+        if not response.text.strip():
+            print(f"  WARNING: Empty response")
+            return None
+            
+        if "tgme_widget_message" not in response.text and "data-post" not in response.text:
+            print(f"  WARNING: Response doesn't contain message data (possible block page)")
+            debug_file = Path("debug_response.html")
+            debug_file.write_text(response.text[:5000], encoding="utf-8")
+            print(f"  DEBUG: Saved response sample to {debug_file}")
+            return None
+            
         return response.text
-    except requests.RequestException:
+        
+    except requests.Timeout:
+        print(f"  ERROR: Request timed out for {url}")
+        return None
+    except requests.RequestException as e:
+        print(f"  ERROR: Request failed: {str(e)[:200]}")
+        return None
+    except Exception as e:
+        print(f"  ERROR: Unexpected error: {str(e)[:200]}")
         return None
 
 
@@ -274,7 +335,7 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
         if not base_url.startswith("https://t.me/s/"):
             continue
 
-        print(f"\nScraping {name} ({base_url})")
+        print(f"\nScraping {name}")
         channel_configs = []
         channel_seen = set()
         next_url = base_url.rstrip("/")
@@ -282,53 +343,30 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
 
         for page in range(MAX_PAGES_PER_CHANNEL):
             print(f"  Page {page + 1}")
-            time.sleep(random.uniform(1.5, 3.0))
+            time.sleep(random.uniform(2.0, 4.0))
             html = fetch_page(next_url)
             if not html:
-                print(f"  ERROR: Failed to fetch {next_url}")
                 break
-            
-            print(f"  DEBUG: Got {len(html)} bytes of HTML")
 
             soup = BeautifulSoup(html, "lxml")
 
             messages = soup.select("[data-post]")
-            print(f"  DEBUG: Found {len(messages)} message containers")
+            if not messages:
+                print(f"  WARNING: No messages found on page")
+                break
 
             text_nodes = soup.select(
                 ".tgme_widget_message_text, .js-message_text"
             )
-            print(f"  DEBUG: Found {len(text_nodes)} text nodes")
-            
-            # Print sample of what text nodes contain
-            if text_nodes:
-                for i, node in enumerate(text_nodes[:3]):
-                    sample = node.get_text(separator="\n", strip=True)[:200]
-                    print(f"  DEBUG: Text node {i} sample: {sample}")
-            else:
-                # Try to find any text content as fallback
-                print("  DEBUG: No text nodes found with standard selectors")
-                print("  DEBUG: Trying alternative selectors...")
-                alt_nodes = soup.select(".tgme_widget_message")
-                print(f"  DEBUG: Found {len(alt_nodes)} message widgets")
-                if alt_nodes:
-                    sample_text = alt_nodes[0].get_text()[:200]
-                    print(f"  DEBUG: First widget text: {sample_text}")
-
             all_text = "\n".join(
                 node.get_text(separator="\n", strip=True)
                 for node in text_nodes
             )
-            
-            print(f"  DEBUG: Combined text length: {len(all_text)}")
 
             raw_configs = extract_configs_from_text(all_text)
-            print(f"  DEBUG: Found {len(raw_configs)} raw configs in text")
-            
             for raw in raw_configs:
                 identity = get_config_identity(raw)
                 if identity is None:
-                    print(f"  DEBUG: Skipping invalid config: {raw[:100]}")
                     continue
                 unique_key = sha256(stable_json(identity))
 
@@ -361,23 +399,22 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
                     oldest_id = msg_id
 
             if oldest_id is None:
-                print(f"  DEBUG: Could not find oldest message ID, stopping")
                 break
 
             if previous_oldest_id is not None and oldest_id >= previous_oldest_id:
-                print(f"  DEBUG: No older messages found")
                 break
 
             previous_oldest_id = oldest_id
             next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
 
         all_channel_data[name] = channel_configs
-        print(f"  Found {len(channel_configs)} unique configs for {name}")
+        print(f"  Found {len(channel_configs)} unique configs")
 
     for name, configs in all_channel_data.items():
         outfile = DATA_DIR / f"{name}.txt"
         atomic_write(outfile, "\n".join(configs) + "\n")
         print(f"Saved {len(configs)} configs -> {outfile}")
+
 
 def main() -> None:
     if not CHANNELS_FILE.exists():
@@ -393,6 +430,12 @@ def main() -> None:
     if not isinstance(channels, dict):
         print("channels.json must contain an object")
         return
+    
+    if PROXY_URL:
+        print(f"Using proxy: {PROXY_URL[:50]}...")
+    else:
+        print("No proxy configured - direct connection (may be blocked by Telegram)")
+    
     scrape_all_channels(channels)
 
 

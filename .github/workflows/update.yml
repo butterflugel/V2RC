@@ -38,6 +38,10 @@ jobs:
             lxml
 
       - name: Run scraper
+        env:
+          PROXY_URL: ${{ secrets.PROXY_URL }}
+          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
         run: python scrape.py
 
       - name: Commit and push changes

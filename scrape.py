@@ -4,14 +4,13 @@ import json
 import os
 import random
 import re
+import socket
 import time
 import urllib.parse
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 CONFIG_REGEX = re.compile(
     r"(vmess://[^\s<>\[\]\"']+|"
@@ -32,9 +31,12 @@ MAX_CONFIGS_PER_CHANNEL = 300
 MAX_PAGES_PER_CHANNEL = 15
 REQUEST_TIMEOUT = 30
 
-PROXY_URL = os.environ.get("PROXY_URL", None)
-PROXY_USERNAME = os.environ.get("PROXY_USERNAME", None)
-PROXY_PASSWORD = os.environ.get("PROXY_PASSWORD", None)
+TELEGRAM_IPS = [
+    "149.154.167.99",
+    "149.154.175.59",
+    "149.154.175.100",
+    "149.154.167.91",
+]
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -45,60 +47,6 @@ USER_AGENTS = [
 ]
 
 TRAILING_CHARS = ".,);]'\"}>"
-
-def get_session():
-    session = requests.Session()
-    
-    if PROXY_URL:
-        proxies = {
-            "http": PROXY_URL,
-            "https": PROXY_URL,
-        }
-        if PROXY_USERNAME and PROXY_PASSWORD:
-            proxy_parts = urllib.parse.urlparse(PROXY_URL)
-            proxy_url = f"{proxy_parts.scheme}://{PROXY_USERNAME}:{PROXY_PASSWORD}@{proxy_parts.netloc}"
-            proxies = {
-                "http": proxy_url,
-                "https": proxy_url,
-            }
-        session.proxies.update(proxies)
-    
-    retry = Retry(
-        total=5,
-        connect=5,
-        read=5,
-        backoff_factor=2,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=frozenset({"GET"}),
-    )
-    
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount("http://", adapter)
-    session.mount("https://", adapter)
-    
-    return session
-
-session = get_session()
-
-def fix_b64(value: str) -> str:
-    value = value.strip()
-    return value + "=" * (-len(value) % 4)
-
-
-def random_headers() -> dict:
-    return {
-        "User-Agent": random.choice(USER_AGENTS),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Accept-Encoding": "gzip, deflate",
-        "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1",
-        "Sec-Fetch-Dest": "document",
-        "Sec-Fetch-Mode": "navigate",
-        "Sec-Fetch-Site": "none",
-        "Sec-Fetch-User": "?1",
-        "Cache-Control": "max-age=0",
-    }
 
 
 def sha256(value: str) -> str:
@@ -116,6 +64,11 @@ def stable_json(data: dict) -> str:
         separators=(",", ":"),
         sort_keys=True,
     )
+
+
+def fix_b64(value: str) -> str:
+    value = value.strip()
+    return value + "=" * (-len(value) % 4)
 
 
 def parse_vmess(link: str) -> dict | None:
@@ -215,13 +168,6 @@ def get_config_identity(link: str) -> dict | None:
         return None
 
 
-def get_config_unique_key(link: str) -> str:
-    identity = get_config_identity(link)
-    if identity is None:
-        return sha256(link)
-    return sha256(stable_json(identity))
-
-
 def normalize_config(raw_link: str, channel_name: str) -> str:
     try:
         raw_link = clean_link(raw_link)
@@ -270,48 +216,93 @@ def atomic_write(path: Path, content: str) -> None:
     tmp.replace(path)
 
 
-def fetch_page(url: str) -> str | None:
+def resolve_telegram_ip() -> str | None:
     try:
-        time.sleep(random.uniform(1, 2))
-        
-        response = session.get(
-            url,
-            headers=random_headers(),
-            timeout=REQUEST_TIMEOUT,
-        )
-        
-        if response.status_code == 403:
-            print(f"  WARNING: Access forbidden (403) - likely IP blocked by Telegram")
-            return None
-        if response.status_code == 429:
-            print(f"  WARNING: Rate limited (429) - waiting longer")
-            time.sleep(60)
-            return None
+        ip = socket.gethostbyname("t.me")
+        print(f"  Resolved t.me to {ip}")
+        return ip
+    except socket.gaierror:
+        pass
+    
+    for dns_server in ["8.8.8.8", "1.1.1.1", "9.9.9.9"]:
+        try:
+            import dns.resolver
+            resolver = dns.resolver.Resolver()
+            resolver.nameservers = [dns_server]
+            answers = resolver.resolve("t.me", "A")
+            ip = str(answers[0])
+            print(f"  Resolved t.me to {ip} via {dns_server}")
+            return ip
+        except Exception:
+            continue
+    
+    ip = random.choice(TELEGRAM_IPS)
+    print(f"  Using fallback IP: {ip}")
+    return ip
+
+
+def fetch_page(url: str, ip: str) -> str | None:
+    parsed = urllib.parse.urlparse(url)
+    headers = {
+        "User-Agent": random.choice(USER_AGENTS),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Host": parsed.netloc,
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Cache-Control": "max-age=0",
+    }
+    
+    direct_url = f"https://{ip}{parsed.path}"
+    if parsed.query:
+        direct_url += f"?{parsed.query}"
+    
+    for attempt in range(3):
+        try:
+            time.sleep(random.uniform(1, 2))
             
-        response.raise_for_status()
-        
-        if not response.text.strip():
-            print(f"  WARNING: Empty response")
-            return None
+            response = requests.get(
+                direct_url,
+                headers=headers,
+                timeout=REQUEST_TIMEOUT,
+                verify=True,
+            )
             
-        if "tgme_widget_message" not in response.text and "data-post" not in response.text:
-            print(f"  WARNING: Response doesn't contain message data (possible block page)")
-            debug_file = Path("debug_response.html")
-            debug_file.write_text(response.text[:5000], encoding="utf-8")
-            print(f"  DEBUG: Saved response sample to {debug_file}")
-            return None
+            if response.status_code == 403:
+                print(f"  WARNING: Access forbidden (403)")
+                return None
+            if response.status_code == 429:
+                print(f"  WARNING: Rate limited (429)")
+                time.sleep(60)
+                continue
             
-        return response.text
-        
-    except requests.Timeout:
-        print(f"  ERROR: Request timed out for {url}")
-        return None
-    except requests.RequestException as e:
-        print(f"  ERROR: Request failed: {str(e)[:200]}")
-        return None
-    except Exception as e:
-        print(f"  ERROR: Unexpected error: {str(e)[:200]}")
-        return None
+            response.raise_for_status()
+            
+            if not response.text.strip():
+                print(f"  WARNING: Empty response")
+                return None
+            
+            if "tgme_widget_message" not in response.text and "data-post" not in response.text:
+                print(f"  WARNING: Response doesn't contain message data")
+                debug_file = Path("debug_response.html")
+                debug_file.write_text(response.text[:5000], encoding="utf-8")
+                print(f"  DEBUG: Saved response sample to {debug_file}")
+                return None
+            
+            return response.text
+            
+        except requests.Timeout:
+            print(f"  ERROR: Request timed out")
+            return None
+        except requests.RequestException as e:
+            print(f"  ERROR: Request failed: {str(e)[:200]}")
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+        except Exception as e:
+            print(f"  ERROR: Unexpected error: {str(e)[:200]}")
+            return None
+    
+    return None
 
 
 def extract_message_id(post_attr: str) -> int | None:
@@ -325,36 +316,42 @@ def extract_message_id(post_attr: str) -> int | None:
 
 
 def scrape_all_channels(channels: dict[str, str]) -> None:
+    print("Resolving Telegram IP...")
+    ip = resolve_telegram_ip()
+    if not ip:
+        print("ERROR: Cannot resolve Telegram IP")
+        return
+    
     global_seen = set()
     all_channel_data = {}
-
+    
     for name, base_url in channels.items():
         if not isinstance(name, str) or not isinstance(base_url, str):
             continue
         base_url = base_url.strip()
         if not base_url.startswith("https://t.me/s/"):
             continue
-
+        
         print(f"\nScraping {name}")
         channel_configs = []
         channel_seen = set()
         next_url = base_url.rstrip("/")
         previous_oldest_id = None
-
+        
         for page in range(MAX_PAGES_PER_CHANNEL):
             print(f"  Page {page + 1}")
             time.sleep(random.uniform(2.0, 4.0))
-            html = fetch_page(next_url)
+            html = fetch_page(next_url, ip)
             if not html:
                 break
-
+            
             soup = BeautifulSoup(html, "lxml")
-
+            
             messages = soup.select("[data-post]")
             if not messages:
                 print(f"  WARNING: No messages found on page")
                 break
-
+            
             text_nodes = soup.select(
                 ".tgme_widget_message_text, .js-message_text"
             )
@@ -362,31 +359,31 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
                 node.get_text(separator="\n", strip=True)
                 for node in text_nodes
             )
-
+            
             raw_configs = extract_configs_from_text(all_text)
             for raw in raw_configs:
                 identity = get_config_identity(raw)
                 if identity is None:
                     continue
                 unique_key = sha256(stable_json(identity))
-
+                
                 if unique_key in global_seen:
                     continue
                 if unique_key in channel_seen:
                     continue
-
+                
                 global_seen.add(unique_key)
                 channel_seen.add(unique_key)
-
+                
                 normalized = normalize_config(raw, name)
                 channel_configs.append(normalized)
-
+                
                 if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
                     break
-
+            
             if len(channel_configs) >= MAX_CONFIGS_PER_CHANNEL:
                 break
-
+            
             oldest_id = None
             for message in messages:
                 post = message.get("data-post")
@@ -397,19 +394,19 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
                     continue
                 if oldest_id is None or msg_id < oldest_id:
                     oldest_id = msg_id
-
+            
             if oldest_id is None:
                 break
-
+            
             if previous_oldest_id is not None and oldest_id >= previous_oldest_id:
                 break
-
+            
             previous_oldest_id = oldest_id
             next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
-
+        
         all_channel_data[name] = channel_configs
         print(f"  Found {len(channel_configs)} unique configs")
-
+    
     for name, configs in all_channel_data.items():
         outfile = DATA_DIR / f"{name}.txt"
         atomic_write(outfile, "\n".join(configs) + "\n")
@@ -430,11 +427,6 @@ def main() -> None:
     if not isinstance(channels, dict):
         print("channels.json must contain an object")
         return
-    
-    if PROXY_URL:
-        print(f"Using proxy: {PROXY_URL[:50]}...")
-    else:
-        print("No proxy configured - direct connection (may be blocked by Telegram)")
     
     scrape_all_channels(channels)
 

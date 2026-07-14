@@ -274,7 +274,7 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
         if not base_url.startswith("https://t.me/s/"):
             continue
 
-        print(f"\nScraping {name}")
+        print(f"\nScraping {name} ({base_url})")
         channel_configs = []
         channel_seen = set()
         next_url = base_url.rstrip("/")
@@ -285,26 +285,50 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
             time.sleep(random.uniform(1.5, 3.0))
             html = fetch_page(next_url)
             if not html:
+                print(f"  ERROR: Failed to fetch {next_url}")
                 break
+            
+            print(f"  DEBUG: Got {len(html)} bytes of HTML")
 
             soup = BeautifulSoup(html, "lxml")
 
             messages = soup.select("[data-post]")
-            if not messages:
-                break
+            print(f"  DEBUG: Found {len(messages)} message containers")
 
             text_nodes = soup.select(
                 ".tgme_widget_message_text, .js-message_text"
             )
+            print(f"  DEBUG: Found {len(text_nodes)} text nodes")
+            
+            # Print sample of what text nodes contain
+            if text_nodes:
+                for i, node in enumerate(text_nodes[:3]):
+                    sample = node.get_text(separator="\n", strip=True)[:200]
+                    print(f"  DEBUG: Text node {i} sample: {sample}")
+            else:
+                # Try to find any text content as fallback
+                print("  DEBUG: No text nodes found with standard selectors")
+                print("  DEBUG: Trying alternative selectors...")
+                alt_nodes = soup.select(".tgme_widget_message")
+                print(f"  DEBUG: Found {len(alt_nodes)} message widgets")
+                if alt_nodes:
+                    sample_text = alt_nodes[0].get_text()[:200]
+                    print(f"  DEBUG: First widget text: {sample_text}")
+
             all_text = "\n".join(
                 node.get_text(separator="\n", strip=True)
                 for node in text_nodes
             )
+            
+            print(f"  DEBUG: Combined text length: {len(all_text)}")
 
             raw_configs = extract_configs_from_text(all_text)
+            print(f"  DEBUG: Found {len(raw_configs)} raw configs in text")
+            
             for raw in raw_configs:
                 identity = get_config_identity(raw)
                 if identity is None:
+                    print(f"  DEBUG: Skipping invalid config: {raw[:100]}")
                     continue
                 unique_key = sha256(stable_json(identity))
 
@@ -337,22 +361,23 @@ def scrape_all_channels(channels: dict[str, str]) -> None:
                     oldest_id = msg_id
 
             if oldest_id is None:
+                print(f"  DEBUG: Could not find oldest message ID, stopping")
                 break
 
             if previous_oldest_id is not None and oldest_id >= previous_oldest_id:
+                print(f"  DEBUG: No older messages found")
                 break
 
             previous_oldest_id = oldest_id
             next_url = f"{base_url.rstrip('/')}?before={oldest_id}"
 
         all_channel_data[name] = channel_configs
-        print(f"  Found {len(channel_configs)} unique configs")
+        print(f"  Found {len(channel_configs)} unique configs for {name}")
 
     for name, configs in all_channel_data.items():
         outfile = DATA_DIR / f"{name}.txt"
         atomic_write(outfile, "\n".join(configs) + "\n")
         print(f"Saved {len(configs)} configs -> {outfile}")
-
 
 def main() -> None:
     if not CHANNELS_FILE.exists():
